@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.ui.touch-punch.min.js"></script>
+    <script src="scripts/PlethoraScript.js"></script>
+    <!--<script src="scripts/objects.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+    <script src="scripts/PlethoraLevelsUtils.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/plethora.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <title>Plethora MVP</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <input id="home-btn" type="image" src="images/home.png" />
+    <div id="move_to_next_lvl" class="centered">
+        כל הכבוד!
+        <br />
+        <div  style="font-size:20px">עבור לשלב הבא</div>
+    </div>
+    <div class="containerDiv">
+        <div id="header">
+            <div id="task"></div>
+        </div>
+        <div id="stageDiv">
+            <canvas ></canvas>
+        </div>
+        <!--<div id="play-btn" class="circle right-sidebar-outer">
+            <div id="play-icon" class="play-icon centered"></div>
+        </div>-->
+        <div id="open-btn" class="right-sidebar-outer">
+            <svg id="open-arrow" version="1.1" x="0px" y="0px" fill="white" viewBox="0 0 42 52.5" enable-background="new 0 0 42 42" xml:space="preserve"><path d="M36,10h-6v22h6V10z M34,30h-2V12h2V30z" /><polygon points="14.121,25.293 10.828,22 28,22 28,20 10.828,20 14.121,16.707 12.707,15.293 7,21 12.707,26.707 " /></svg>
+            <svg id="close-arrow" version="1.1" x="0px" y="0px" fill="white" viewBox="0 0 42 52.5" enable-background="new 0 0 42 42" xml:space="preserve"><path d="M13,10H7v22h6V10z M11,30H9V12h2V30z" /><polygon points="29.293,16.707 32.586,20 15,20 15,22 32.586,22 29.293,25.293 30.707,26.707 36.414,21 30.707,15.293 " /></svg>
+        </div>
+        <div id="sidebar" class="right-sidebar-outer shadow">
+            <div id="slots-container">
+            </div>
+            <div id="cards-container">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
