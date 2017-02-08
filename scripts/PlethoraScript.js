@@ -11,7 +11,7 @@ $(function () {
 
 
     $("#home-btn").click(function () {
-        window.location.href = "instructions.html";
+        window.location.href = "levels.html";
     });
 
 

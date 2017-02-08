@@ -8,7 +8,7 @@ var config = {
 
 $(function () {
     var pause = "";
-    var levelNum = 0;
+    var levelNum = GetLevelNum();
     var shapes = [];
     var cards;
     var successCriterions;
@@ -77,6 +77,12 @@ $(function () {
         //TEST
         //if (shapes.length < 20)
         shapes.push(this);
+    }
+
+    shapeObj.prototype.Remove = function () {
+        shapes = jQuery.grep(shapes, function (value) {
+            return value != this;
+        });
     }
 
     shapeObj.prototype.ChangeColor = function(newColor)
@@ -183,6 +189,7 @@ $(function () {
             for (var i = 0; i < level.shapes.length ; i++) {
                 var s = new shapeObj(level.shapes[i], GetPosition(shapes[i]));
             }
+
             shapes.push(s);
 
             //draw senteces  
@@ -284,46 +291,6 @@ $(function () {
         return true;
     }
 
-    //function HitTwoShapes_ORG(shape1, shape2)
-    //{
-    //    for (var i = 0; i < sentences.length; i++) {
-    //        var sentence = sentences[i];
-    //        if (sentence.completed == true) {
-    //            if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "shape") {
-    //                var whenShape1 = GetSlotOrCard(sentence, 1).content;
-    //                var whenShape2 = GetSlotOrCard(sentence, 3).content;
-    //                if ((shape1.Equal(whenShape1) && shape2.Equal(whenShape2)) ||
-    //                    (shape1.Equal(whenShape2) && shape2.Equal(whenShape1))) {
-    //                    var thenSlotNum = GetThenSlotNumber(sentence);
-    //                    var thenShape = GetSlotOrCard(sentence, thenSlotNum + 1);
-    //                    var thenMethod = GetSlotOrCard(sentence, thenSlotNum + 2);
-    //                    switch (thenMethod.content) {
-    //                        case "created":
-    //                            {
-    //                                var hitPosition = { x: shape1.x, y: shape1.y };
-    //                                var newShape = new shapeObj(thenShape.content, hitPosition);
-    //                                newShape.Created();
-    //                                newShape.hitShapeFlag = true;
-    //                                shape1.hitShapeFlag = true;
-    //                                shape2.hitShapeFlag = true;
-    //                                //shapes.push(newShape);
-
-    //                                setTimeout(function () {
-    //                                    newShape.hitShapeFlag = false;
-    //                                    shape1.hitShapeFlag = false;
-    //                                    shape2.hitShapeFlag = false;
-    //                                }, 300);
-
-    //                                break;
-    //                            }
-                      
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
     function HitTwoShapes(shape1, shape2) {
         for (var i = 0; i < sentences.length; i++) {
             var sentence = sentences[i];
@@ -333,7 +300,13 @@ $(function () {
                     var whenShape1 = GetSlotOrCard(sentence, 1).content;
                     var whenShape2 = GetSlotOrCard(sentence, 3).content;
                     if ((shape1.Equal(whenShape1) && shape2.Equal(whenShape2)) ||
-                        (shape1.Equal(whenShape2) && shape2.Equal(whenShape1))) {          
+                        (shape1.Equal(whenShape2) && shape2.Equal(whenShape1))) {
+                        shape1.hitShapeFlag = true;
+                        shape2.hitShapeFlag = true;
+                        setTimeout(function () {
+                            shape1.hitShapeFlag = false;
+                            shape2.hitShapeFlag = false;
+                        }, 500);
                         ExecuteAction(sentence, shape1);                   
                     }
                 }
@@ -437,19 +410,42 @@ $(function () {
 
     }
 
-    function ChangeDirection(shape1, shape2) {
-        var tmpx1 = shape1.x;
-        var tmpy1 = shape1.y;
-        var tmpx2 = shape2.x;
-        var tmpy2 = shape2.y;
+    //function ChangeDirection_ORG(shape1, shape2) {
+    //    var tmpx1 = shape1.x;
+    //    var tmpy1 = shape1.y;
+    //    var tmpx2 = shape2.x;
+    //    var tmpy2 = shape2.y;
 
+
+    //    var Del = shape2.r + shape1.r;
+    //    var dX = shape2.x - shape1.x;
+    //    var dY = shape2.y - shape1.y;
+    //    var dVX = shape2.vx - shape1.vx;
+    //    var dVY = shape2.vy - shape1.vy;
+    //    var dSq = dX * dX + dY * dY;
+    //    var elasticity = .8;//1;
+    //    var alpha = (1 + elasticity) / 2 * (dX * dVX + dY * dVY) / dSq;
+
+    //    shape1.vx += dX * alpha;
+    //    shape1.vy += dY * alpha;
+    //    shape2.vx -= dX * alpha;
+    //    shape2.vy -= dY * alpha;
+
+    //    var DDist = ((Del + 1) / Math.sqrt(dSq) - 1) / 2;
+    //    shape1.x -= dX * DDist;
+    //    shape1.y -= dY * DDist;
+    //    shape2.x += dX * DDist;
+    //    shape2.y += dY * DDist;
+    //}
+
+    function ChangeDirection(shape1, shape2) {
         var Del = shape2.r + shape1.r;
         var dX = shape2.x - shape1.x;
         var dY = shape2.y - shape1.y;
         var dVX = shape2.vx - shape1.vx;
         var dVY = shape2.vy - shape1.vy;
         var dSq = dX * dX + dY * dY;
-        var elasticity = 1;//.8;
+        var elasticity = .8;//1;
         var alpha = (1 + elasticity) / 2 * (dX * dVX + dY * dVY) / dSq;
 
         shape1.vx += dX * alpha;
@@ -462,27 +458,6 @@ $(function () {
         shape1.y -= dY * DDist;
         shape2.x += dX * DDist;
         shape2.y += dY * DDist;
-
-      //  if ((shape1.x + shape1.vx + shape1.r > container.x + container.width) ||
-      //      (shape1.x - shape1.r + shape1.vx < container.x)) {
-      //      shape1.x = tmpx1;
-      //      shape1.vx = 10 * Math.random();
-      //  }
-      //  if ((shape1.y + shape1.vy + shape1.r > container.y + container.height) ||
-      //      (shape1.y - shape1.r + shape1.vy < container.y)) {
-      //      shape1.y = tmpy1;
-      //      shape1.vy = 10 * Math.random();
-      //  }
-      //  if ((shape2.x + shape2.vx + shape2.r > container.x + container.width) ||
-      //(shape2.x - shape2.r + shape2.vx < container.x)) {
-      //      shape2.x = tmpx2;
-      //      shape2.vx = 10 * Math.random();
-      //  }
-      //  if ((shape2.y + shape2.vy + shape2.r > container.y + container.height) ||
-      //      (shape2.y - shape2.r + shape2.vy < container.y)) {
-      //      shape2.y = tmpy2;
-      //      shape2.vy = 10 * Math.random();
-      //  }
     }
 
     function GetSlotOrCard(sentence, slotNum)
@@ -584,7 +559,7 @@ $(function () {
                     $("#move_to_next_lvl").show();
                     cancelAnimationFrame(pause);
                 }
-            }, 1500);
+            }, 1000);
         }
     }
 
@@ -621,7 +596,7 @@ $(function () {
         }
     }
 
-    $("#move_to_next_lvl").click(function () {
+    $("#move_to_next_lvl").click(function () {        
         $("#move_to_next_lvl").hide();
         ClearLevel();
         levelNum++;
@@ -662,6 +637,12 @@ $(function () {
 
     function IsSidebarOpen() {
         return $("#sidebar").hasClass("show-from-right");
+    }
+
+    function GetLevelNum()
+    {
+        var levelNum = window.location.href.split('=')[1];
+        return levelNum == undefined ? 0 : levelNum;
     }
 
 });
