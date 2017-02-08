@@ -8,7 +8,7 @@ var config = {
 
 $(function () {
     var pause = "";
-    var levelNum = 5;
+    var levelNum = 0;
     var shapes = [];
     var cards;
     var successCriterions;
