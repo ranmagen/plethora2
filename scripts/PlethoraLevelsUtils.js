@@ -163,7 +163,7 @@ $(function () {
                                 }
                                 else
                                 {
-                                    ChangeDirection(shapes[i], shapes[j]);
+                                   // ChangeDirection(shapes[i], shapes[j]);
                                     HitTwoShapes(shapes[i], shapes[j]);
                                 }
                             }
@@ -320,8 +320,11 @@ $(function () {
             for (var i = 0; i < sentences.length; i++) {
                 var sentence = sentences[i];
                 if (sentence.completed == true) {
-                    if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "wall") {                    
-                        ExecuteAction(sentence, shape);                     
+                    var whenShape = GetSlotOrCard(sentence, 1).content;
+                    if (shape.Equal(whenShape)) {
+                        if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "wall") {
+                            ExecuteAction(sentence, shape);
+                        }
                     }
                 }
             }
