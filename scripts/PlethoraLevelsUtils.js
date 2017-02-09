@@ -75,8 +75,8 @@ $(function () {
     shapeObj.prototype.Created = function()
     {
         //TEST
-        //if (shapes.length < 20)
-        shapes.push(this);
+        if (shapes.length < 800)
+            shapes.push(this);
     }
 
     shapeObj.prototype.Remove = function () {
@@ -163,7 +163,7 @@ $(function () {
                                 }
                                 else
                                 {
-                                   // ChangeDirection(shapes[i], shapes[j]);
+                                   //ChangeDirection(shapes[i], shapes[j]);
                                     HitTwoShapes(shapes[i], shapes[j]);
                                 }
                             }
@@ -246,7 +246,7 @@ $(function () {
             $('<div></div>').data('number', i).attr('id', 'card' + i).appendTo('#cards-container').addClass("card").draggable({
                 containment: '#sidebar',
                 stack: '#slots-container div',
-                //cursor: '-webkit-grab',
+                cursor: 'move',
                 revert: true
             });
             if (cards[i].type != "shape") {
