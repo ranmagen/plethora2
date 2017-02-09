@@ -19,7 +19,7 @@ $(function () {
     ctx.canvas.height = window.innerHeight - $("#header").height();
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'black';
-    var container = { x: 50, y: 50, width: ctx.canvas.width - 100, height: ctx.canvas.height - 100 };
+    var container = { x: 50, y: 20, width: ctx.canvas.width - 100, height: ctx.canvas.height - 80 };
     ctx.fillRect(container.x, container.y, container.width, container.height);
     firebase.initializeApp(config);
     var sentences = [];
@@ -42,6 +42,7 @@ $(function () {
     var slotObj = function (slot) {
         this.type = slot.type;
         this.content = slot.content;
+        this.content_h = slot.content_h;
         this.card;
     }
 
@@ -230,7 +231,9 @@ $(function () {
                 }
                 else {
                     if (slots[j].type != "shape")
-                        $("#slot" + i + '_' + j).addClass(slots[j].type).text(slots[j].content);
+                    {
+                        $("#slot" + i + '_' + j).addClass(slots[j].type).text(slots[j].content_h);
+                    }                        
                     else {
                         $("<div class='" + slots[j].content.type + " " + slots[j].content.color + " centered'></div>").appendTo("#slot" + i + '_' + j);
                     }
@@ -250,13 +253,12 @@ $(function () {
                 revert: true
             });
             if (cards[i].type != "shape") {
-                $("#card" + i).addClass(cards[i].type).text(cards[i].content);
+                $("#card" + i).addClass(cards[i].type).text(cards[i].content_h);
             }
             else {
                 $("<div class='" + cards[i].content.type + " " + cards[i].content.color + " centered'></div>").appendTo("#card" + i);
                 if (cards[i].content.type == "triangle") {
                     var color = $("#card" + i + " > div").css("background-color");
-
                     $("#card" + i + " > div").css("background", "none").css("color", color);
                 }
             }
