@@ -19,7 +19,8 @@ $(function () {
     ctx.canvas.height = window.innerHeight - $("#header").height();
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'black';
-    var container = { x: 50, y: 20, width: ctx.canvas.width - 100, height: ctx.canvas.height - 80 };
+    //var container = { x: 50, y: 20, width: ctx.canvas.width - 100, height: ctx.canvas.height - 80 };
+    var container = { x: 60, y: 10, width: ctx.canvas.width - 130, height: ctx.canvas.height - 60 };
     ctx.fillRect(container.x, container.y, container.width, container.height);
     firebase.initializeApp(config);
     var sentences = [];
@@ -37,6 +38,29 @@ $(function () {
         this.vy = 10 * Math.random();
         this.hitWallFlag = false;
         this.hitShapeFlag = false;
+    }
+
+    shapeObj.prototype.Equal = function (shape) {
+        if (this.type == shape.type)
+            if (this.color == shape.color)
+                return true;
+        return false;
+    }
+
+    shapeObj.prototype.Created = function () {
+        //TEST
+        if (shapes.length < 800)
+            shapes.push(this);
+    }
+
+    shapeObj.prototype.Remove = function () {
+        shapes = jQuery.grep(shapes, function (value) {
+            return value != this;
+        });
+    }
+
+    shapeObj.prototype.ChangeColor = function (newColor) {
+        this.color = newColor;
     }
 
     var slotObj = function (slot) {
@@ -66,31 +90,6 @@ $(function () {
         return slots;
     }
 
-    shapeObj.prototype.Equal = function (shape) {
-        if (this.type == shape.type)
-            if (this.color == shape.color)
-                return true;
-        return false;
-    }
-
-    shapeObj.prototype.Created = function()
-    {
-        //TEST
-        if (shapes.length < 800)
-            shapes.push(this);
-    }
-
-    shapeObj.prototype.Remove = function () {
-        shapes = jQuery.grep(shapes, function (value) {
-            return value != this;
-        });
-    }
-
-    shapeObj.prototype.ChangeColor = function(newColor)
-    {
-        this.color = newColor;
-    }
-
     $(function () {
         LevelSetup();
     });
@@ -111,8 +110,8 @@ $(function () {
             // Also, adjust for fpsInterval not being multiple of 16.67
             then = now - (elapsed % fpsInterval);
 
-            ctx.fillStyle = 'grey';
-            ctx.strokeStyle = 'grey';
+            ctx.fillStyle = '#00031a';//'grey';
+            //  ctx.strokeStyle = 'grey';
             ctx.fillRect(container.x, container.y, container.width, container.height);
             CheckSuccess();
             for (var i = 0; i < shapes.length; i++) {
@@ -184,7 +183,10 @@ $(function () {
         dbRef.once("value", function (data) {
             var level = data.val()[levelNum];            
             //set task description
-            $("#task").text(level.task);
+            //$("#task").text(level.task);
+          
+            //$("#level_name").text(level.name);
+            $("#level_name").text(level.task);
 
             //insert init-level shapes to shapes array     
             for (var i = 0; i < level.shapes.length ; i++) {
@@ -206,6 +208,19 @@ $(function () {
 
             //start animation
             startAnimating(25);
+
+            //$('#light').animate({ svgFill: '#d93f07' }, 500);
+         
+                   
+            //setTimeout(function () {
+            //    $('#light').animate({ svgFill: '#d93f07' }, 500);
+
+            //        //    $('#light').css({ fill: "#d93f07" });
+            //        //}, 50);
+            //        //setTimeout(function () {
+            //        //    $('#light').css({ fill: "#898989" });
+            //        }, 2000);
+ 
 
             //requestAnimationFrame(draw);
         });
@@ -638,6 +653,12 @@ $(function () {
             }, 500);
         
         }
+    });
+
+    $("#reload-btn").click(function () {
+        ClearLevel();
+        shapes = [];
+        LevelSetup();
     });
 
     function IsSidebarOpen() {
