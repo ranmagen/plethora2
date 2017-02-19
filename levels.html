@@ -13,6 +13,7 @@
     <title>Plethora - Levels</title>
 </head>
 <body onload="loader()" style="margin:0;">
+
     <!--<div id="loader"></div>-->
     <div id="logo-div">
         <img id="logo" src="images/logo.png" />
@@ -22,8 +23,20 @@
         <div class="shadow"></div>
         <div class="ball"></div>
     </div>
-    <div id="container" class="animate-bottom" style="display:none;">
-
+    <div id="levels-div">
+        <input id="home-btn" type="image" src="images/home.png" />
+        <input id="reload-btn" type="image" src="images/reload.png" />
+        <canvas> </canvas>
+            <!--<div id="inner-div">-->
+                <div id="open-btn" class="right-sidebar-outer">
+                    <svg height="100" width="40">
+                        <circle id="light" cx="10" cy="50" r="10" fill="#898989" />
+                    </svg>
+                </div>
+                <div id="levels-container">
+                </div>
+            <!--</div>-->
+       
     </div>
 </body>
 </html>
