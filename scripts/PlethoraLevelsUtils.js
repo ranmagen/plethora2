@@ -178,6 +178,7 @@ $(function () {
     }
 
     function LevelSetup() {
+        $("#open-light").css({ fill: "#898989" });
         var dbRef = firebase.database().ref('levels');
 
         dbRef.once("value", function (data) {
