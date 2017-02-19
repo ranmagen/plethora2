@@ -182,11 +182,10 @@ $(function () {
 
         dbRef.once("value", function (data) {
             var level = data.val()[levelNum];            
-            //set task description
-            //$("#task").text(level.task);
-          
-            //$("#level_name").text(level.name);
-            $("#level_name").text(level.task);
+
+            //set task description and level name       
+            $("#task").text(level.task);
+            $("#level_name").text(level.name);
 
             //insert init-level shapes to shapes array     
             for (var i = 0; i < level.shapes.length ; i++) {
