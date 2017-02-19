@@ -208,21 +208,33 @@ $(function () {
             //start animation
             startAnimating(25);
 
-            //$('#light').animate({ svgFill: '#d93f07' }, 500);
-         
-                   
-            //setTimeout(function () {
-            //    $('#light').animate({ svgFill: '#d93f07' }, 500);
-
-            //        //    $('#light').css({ fill: "#d93f07" });
-            //        //}, 50);
-            //        //setTimeout(function () {
-            //        //    $('#light').css({ fill: "#898989" });
-            //        }, 2000);
- 
-
-            //requestAnimationFrame(draw);
+            setTimeout(function () {
+                ChangeOpenLightColor();
+            }, 3000);
         });
+    }
+
+    function ChangeOpenLightColor()
+    {
+        $("#open-light").css({ fill: "#d93f07" });
+        setTimeout(function () {
+            $("#open-light").css({ fill: "#898989" });
+        }, 200);
+        setTimeout(function () {
+            $("#open-light").css({ fill: "#d93f07" });
+        }, 400);
+        setTimeout(function () {
+            $("#open-light").css({ fill: "#898989" });
+        }, 600);
+        setTimeout(function () {
+            $("#open-light").css({ fill: "#d93f07" });
+        }, 800);
+        setTimeout(function () {
+            $("#open-light").css({ fill: "#898989" });
+        }, 1000);
+        setTimeout(function () {
+            $("#open-light").css({ fill: "#d93f07" });
+        }, 1200);
     }
 
     function DrawSentences() {
