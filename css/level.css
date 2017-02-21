@@ -290,3 +290,45 @@ div.slot p {
     /*box-shadow: -6px 1px 20px 10px #333232;*/
     box-shadow: 5px 3px 0px 1px #b76300;
 }
+
+
+#win_condition {
+    /*display: none;*/
+    background-color: #f77f08; /*#606060;*/
+    box-shadow: 5px 3px 0px 1px #b76300;
+    width: 50%;
+    height: 70%;
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%);
+ /*transform: translate(-50%, -50%);*/
+    /*border:30px solid #808080;*/
+}
+
+#win_condition_btn
+{
+    background-color: #f77f08;
+    border-radius: 0 0 90px 90px;
+    width: 102px;
+    height: 51px;
+    position: absolute;
+    top: 99% !important;
+    left: 40%;
+    z-index: 10000;
+    box-shadow: 5px 3px 0px 1px #b76300;
+}
+
+#close_win_condition
+{
+
+}
+
+#win_condition_text
+{
+    font-size: 60px;
+    text-align: center;
+    line-height: 1;
+    vertical-align: middle;
+    margin-top: 25%;
+}
