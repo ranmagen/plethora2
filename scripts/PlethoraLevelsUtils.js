@@ -177,17 +177,20 @@ $(function () {
         pause = requestAnimationFrame(draw);
     }
 
+    let level = null;
+
     function LevelSetup() {
         $("#open-light").css({ fill: "#898989" });
         var dbRef = firebase.database().ref('levels');
 
         dbRef.once("value", function (data) {
-            var level = data.val()[levelNum];            
+            level = data.val()[levelNum];            
 
             //set task description and level name       
          //   $("#task").text(level.task);
             //   $("#level_name").text(level.name);
-            $("#level_name").text(level.task);
+           
+            $("#win_condition_text").text(level.task);
 
             //insert init-level shapes to shapes array     
             for (var i = 0; i < level.shapes.length ; i++) {
@@ -209,34 +212,31 @@ $(function () {
 
             //start animation
             startAnimating(25);
-
-            setTimeout(function () {
-                ChangeOpenLightColor();
-            }, 3000);
+            setTimeout(showWinCondition, 1000);
+         
         });
     }
 
-    function ChangeOpenLightColor()
+    function BlinkOpenLightColor()
     {
-        $("#open-light").css({ fill: "#d93f07" });
-        setTimeout(function () {
+         setTimeout(function () {
             $("#open-light").css({ fill: "#898989" });
         }, 200);
         setTimeout(function () {
             $("#open-light").css({ fill: "#d93f07" });
         }, 400);
-        setTimeout(function () {
-            $("#open-light").css({ fill: "#898989" });
-        }, 600);
-        setTimeout(function () {
-            $("#open-light").css({ fill: "#d93f07" });
-        }, 800);
-        setTimeout(function () {
-            $("#open-light").css({ fill: "#898989" });
-        }, 1000);
-        setTimeout(function () {
-            $("#open-light").css({ fill: "#d93f07" });
-        }, 1200);
+
+    }
+
+    function BlinkCloseLightColor()
+    {
+         $("#open-light").css({ fill: "#7799bb" });
+        //  setTimeout(function () {
+        //     $("#open-light").css({ fill: "#898989" });
+        // }, 200);
+        // setTimeout(function () {
+        //     $("#open-light").css({ fill: "#7799bb" });
+        // }, 400);
     }
 
     function DrawSentences() {
@@ -318,6 +318,9 @@ $(function () {
             }
         }
         sentence.completed = true;
+
+        BlinkCloseLightColor();
+
         return true;
     }
 
@@ -580,6 +583,7 @@ $(function () {
         return Math.sqrt((diffX * diffX) + (diffY * diffY));
     }
 
+
     function CheckSuccess() {
         var isSuccess = true;
         for (var i = 0; i < successCriterions.length; i++) {
@@ -588,9 +592,11 @@ $(function () {
         if (isSuccess == true) {          
             setTimeout(function () {
                 if (checkSuccess == true) {
+                    //clearInterval(blinkOpenSidebarLight);
                     checkSuccess = false;
                     $("#move_to_next_lvl").show();
                     cancelAnimationFrame(pause);
+                    clearInterval(blinkOpenSidebarLight);
                 }
             }, 1000);
         }
@@ -647,6 +653,8 @@ $(function () {
         shapes = [];
         checkSuccess = true;
         $("#task").text("");
+        $("#level_name").text("");
+        $("#open-light").css({ fill: "#898989" });
     }
 
     $("#open-btn").click(function () {
@@ -654,13 +662,27 @@ $(function () {
         if (IsSidebarOpen()) //open sidebar 
         {
             cancelAnimationFrame(pause);
-            $("#open-arrow").hide();
-            $("#close-arrow").show();
+            clearInterval(blinkOpenSidebarLight);
+            // $("#open-arrow").hide();
+            // $("#close-arrow").show();
         }
         else //close sidebar
         {
-            $("#open-arrow").show();
-            $("#close-arrow").hide();
+          if (checkSuccess == true)
+          {
+              setTimeout(function () {
+              if(checkSuccess == true)
+                {
+                     blinkOpenSidebarLight = setInterval(BlinkOpenLightColor, 400);
+                }
+               
+            }, 10000);
+               
+          }
+
+            
+            // $("#open-arrow").show();
+            // $("#close-arrow").hide();
             setTimeout(function () {
                 requestAnimationFrame(draw);
             }, 500);
@@ -684,4 +706,31 @@ $(function () {
         return levelNum == undefined ? 0 : levelNum;
     }
 
+    
+
+    function showWinCondition(){
+        $("#win_condition").delay(100).animate({
+             top: '0px',    
+        }, 2000);
+            $("#win_condition_btn").delay(100).animate({
+             top: '0px',    
+        }, 2000);
+    }
+
+
+var blinkOpenSidebarLight;
+var blinkCloseSidebarLight;
+
+    $("#win_condition_btn").click(function(){
+         $("#level_name").text(level.task);
+           $("#win_condition").delay(100).animate({
+             top: '-100%',    
+        }, 1000);
+           setTimeout(function () {
+               // BlinkOpenLightColor();
+               blinkOpenSidebarLight = setInterval(BlinkOpenLightColor, 400);
+            }, 1500);
+    });
+
 });
+
