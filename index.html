@@ -18,11 +18,11 @@
 <body>
     <input id="home-btn" type="image" src="images/home.png" />
     <input id="reload-btn" type="image" src="images/reload.png" />
-    <div id="move_to_next_lvl" class="centered">
+    <!--<div id="move_to_next_lvl" class="centered">
         כל הכבוד!
         <br />
         <div style="font-size:20px">עבור לשלב הבא</div>
-    </div>
+    </div>-->
     <div id="header">
         <!--<div id="task"></div>-->
         <div id="level_name"></div>
@@ -34,6 +34,7 @@
         <div id="stageDiv">
             <canvas></canvas>
         </div>
+        <div id='limit-shapes'></div>
         <!--<div id="play-btn" class="circle right-sidebar-outer">
             <div id="play-icon" class="play-icon centered"></div>
         </div>-->
@@ -58,6 +59,14 @@
             <div id="win_condition_btn">
                   <svg  height="100" width="100">
                     <circle id="close_win_condition" cx="50" cy="30" r="10"  fill="#898989" />
+                 </svg>
+            </div>
+        </div>
+        <div id="move_to_next_lvl">
+            <p id="move_to_next_lvl_text">כל הכבוד!</p>
+            <div id="move_to_next_lvl_btn">
+                  <svg  height="100" width="100">
+                    <circle id="close_move_to_next_lvl" cx="50" cy="30" r="10"  fill="#898989" />
                  </svg>
             </div>
         </div>
