@@ -19,6 +19,7 @@ $(function () {
     ctx.canvas.height = window.innerHeight - $("#header").height();
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'black';
+    var limitShapes;
     //var container = { x: 50, y: 20, width: ctx.canvas.width - 100, height: ctx.canvas.height - 80 };
     var container = { x: 60, y: 10, width: ctx.canvas.width - 130, height: ctx.canvas.height - 60 };
     ctx.fillRect(container.x, container.y, container.width, container.height);
@@ -47,10 +48,13 @@ $(function () {
         return false;
     }
 
-    shapeObj.prototype.Created = function () {
-        //TEST
-        if (shapes.length < 800)
-            shapes.push(this);
+    shapeObj.prototype.Created = function () {        
+        if (shapes.length < limitShapes)
+        {
+             shapes.push(this);
+            //$("#limit-shapes").text(shapes.length + " out of " + limitShapes);
+             $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
+        }    
     }
 
     shapeObj.prototype.Remove = function () {
@@ -184,11 +188,13 @@ $(function () {
         var dbRef = firebase.database().ref('levels');
 
         dbRef.once("value", function (data) {
-            level = data.val()[levelNum];            
+        level = data.val()[levelNum];            
+       
+        limitShapes = level.limitShapes == undefined ? 70 : level.limitShapes;
 
-            //set task description and level name       
-         //   $("#task").text(level.task);
-            //   $("#level_name").text(level.name);
+        //set task description and level name       
+        //$("#task").text(level.task);
+        //$("#level_name").text(level.name);
            
             $("#win_condition_text").text(level.task);
 
@@ -198,6 +204,7 @@ $(function () {
             }
 
             shapes.push(s);
+            $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
 
             //draw senteces  
             InitSentences(level.sentences);
@@ -594,7 +601,8 @@ $(function () {
                 if (checkSuccess == true) {
                     //clearInterval(blinkOpenSidebarLight);
                     checkSuccess = false;
-                    $("#move_to_next_lvl").show();
+                   // $("#move_to_next_lvl").show();
+                   showLevelComplete();
                     cancelAnimationFrame(pause);
                     clearInterval(blinkOpenSidebarLight);
                 }
@@ -635,13 +643,13 @@ $(function () {
         }
     }
 
-    $("#move_to_next_lvl").click(function () {        
-        $("#move_to_next_lvl").hide();
-        ClearLevel();
-        levelNum++;
-        shapes = [];
-        LevelSetup();
-    });
+    // $("#move_to_next_lvl").click(function () {        
+    //     $("#move_to_next_lvl").hide();
+    //     ClearLevel();
+    //     levelNum++;
+    //     shapes = [];
+    //     LevelSetup();
+    // });
 
     function ClearLevel() {
         $("#slots-container div").remove();
@@ -706,6 +714,15 @@ $(function () {
         return levelNum == undefined ? 0 : levelNum;
     }
 
+
+    function showLevelComplete(){        
+        $("#move_to_next_lvl").delay(100).animate({
+             top: '0px',    
+        }, 2000);
+        $("#move_to_next_lvl_btn").delay(100).animate({
+             top: '0px',    
+        }, 2000);
+    }
     
 
     function showWinCondition(){
@@ -730,6 +747,24 @@ var blinkCloseSidebarLight;
                // BlinkOpenLightColor();
                blinkOpenSidebarLight = setInterval(BlinkOpenLightColor, 400);
             }, 1500);
+    });
+
+        $("#move_to_next_lvl_btn").click(function(){     
+        ClearLevel();
+        levelNum++;
+        shapes = [];
+        LevelSetup();          
+
+           $("#move_to_next_lvl").delay(100).animate({
+             top: '-100%',    
+        }, 1000);
+           setTimeout(function () {
+               blinkOpenSidebarLight = setInterval(BlinkOpenLightColor, 400);
+            }, 1500);
+    });
+
+        $("#home-btn").click(function () {
+        window.location.href = "levels.html?level=" + levelNum;
     });
 
 });

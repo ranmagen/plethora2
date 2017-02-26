@@ -4,15 +4,11 @@ var eventInterval;
 
 $(function () {
     $("#close-arrow").hide();
-    $("#move_to_next_lvl").hide();
+   // $("#move_to_next_lvl").hide();
     $('.foot').removeClass('slide-down');
     $('.foot').addClass('slide-up', 1000, '');
 
 
-
-    $("#home-btn").click(function () {
-        window.location.href = "levels.html";
-    });
 
 
     //$("#play-btn").click(function () {
