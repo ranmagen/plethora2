@@ -168,7 +168,7 @@ div.shape {
 /***** answer options *****/
 #cards-container {
     position: absolute;
-    top: 75%;
+    top: 70%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -277,7 +277,7 @@ div.slot p {
     display: table-cell;
 }*/
 
-#move_to_next_lvl {
+/*#move_to_next_lvl {
     position: absolute;
     padding: 75px;
     background-color: #f77f08;
@@ -286,16 +286,14 @@ div.slot p {
     font-weight: bolder;
     cursor: pointer;
     z-index: 1000000;
-    /*border-radius: 10px;*/
-    /*box-shadow: -6px 1px 20px 10px #333232;*/
     box-shadow: 5px 3px 0px 1px #b76300;
-}
+}*/
 
 
-#win_condition {
+#win_condition, #move_to_next_lvl {
     /*display: none;*/
-    background-color: #f77f08; /*#606060;*/
-    box-shadow: 5px 3px 0px 1px #b76300;
+    background-color: #7799bb; /*#606060;*/
+    box-shadow: 5px 3px 0px 1px #5a759b;
     width: 50%;
     height: 70%;
     position: absolute;
@@ -306,9 +304,9 @@ div.slot p {
     /*border:30px solid #808080;*/
 }
 
-#win_condition_btn
+#win_condition_btn, #move_to_next_lvl_btn
 {
-    background-color: #f77f08;
+    background-color: #7799bb;
     border-radius: 0 0 90px 90px;
     width: 102px;
     height: 51px;
@@ -316,19 +314,27 @@ div.slot p {
     top: 99% !important;
     left: 40%;
     z-index: 10000;
-    box-shadow: 5px 3px 0px 1px #b76300;
+    box-shadow: 5px 3px 0px 1px #5a759b;
+    cursor: pointer;
 }
 
-#close_win_condition
+/*#close_win_condition
 {
 
-}
+}*/
 
-#win_condition_text
+#win_condition_text, #move_to_next_lvl_text
 {
     font-size: 60px;
     text-align: center;
     line-height: 1;
     vertical-align: middle;
     margin-top: 25%;
+}
+
+#limit-shapes
+{
+    position: absolute;
+    top:94%;
+    left: 60px;
 }
