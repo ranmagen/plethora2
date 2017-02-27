@@ -224,7 +224,7 @@ $(function () {
         });
     }
 
-    function BlinkOpenLightColor()
+    function AttentionSidebar()
     {
          setTimeout(function () {
             $("#open-light").css({ fill: "#898989" });
@@ -246,9 +246,50 @@ $(function () {
         // }, 400);
     }
 
-    function DrawSentences() {
-        var sentencesCnt = sentences.length;// - 1;
-        // for (var i = sentencesCnt; i >= 0; i--) {
+    // function DrawSentences_ORG() {
+    //     var sentencesCnt = sentences.length;
+
+    //     for (var i = 0; i < sentences.length; i++) {
+    //         var slots = sentences[i].slots;
+    //         var slotsCnt = slots.length - 1;
+
+    //         $('<div></div>').attr('id', 'sentence' + i).addClass('sentence').appendTo('#slots-container');
+
+    //         for (var j = slotsCnt; j >= 0; j--) {            
+    //             $('<div></div>').data('number', i + "_" + j).attr('id', 'slot' + i + '_' + j).addClass("slot").appendTo('#sentence' + i).droppable({
+    //                 accept: '#cards-container div',
+    //                 hoverClass: 'hovered',
+    //                 drop: HandleCardDrop
+    //             });
+    //             if (slots[j].content == "question") {
+    //                 $("<img src='images/rules/question.png'></img>").appendTo("#slot" + i + '_' + j);
+    //                 $("#slot" + i + '_' + j).addClass("question").addClass(slots[j].type);
+    //             }
+    //             else {
+    //                if(slots[j].type == "conjunction")
+    //                 {
+    //                     $("<p>"+slots[j].content_h+"</p>").appendTo("#slot" + i + '_' + j);
+    //                     $("#slot" + i + '_' + j).addClass(slots[j].type);
+    //                 }
+    //                 else if (slots[j].type == "shape"){
+    //                     $("#slot" + i + '_' + j).addClass(slots[j].type);
+    //                     $("<div class='" + slots[j].content.type + " " + slots[j].content.color + " centered'></div>").appendTo("#slot" + i + '_' + j);
+    //                 }
+    //                 else //icon for method or param
+    //                 {
+    //                     $("<img src='images/rules/" + slots[j].content + ".png'></img>").appendTo("#slot" + i + '_' + j);
+    //                     $("#slot" + i + '_' + j).addClass(slots[j].type);
+    //                 }                                          
+    //             }
+    //         }
+    //         $('<div></div>').addClass('sentence-margin').insertAfter('#sentence' + i);
+    //     }
+    // }
+
+
+     function DrawSentences() {
+        var sentencesCnt = sentences.length;
+
         for (var i = 0; i < sentences.length; i++) {
             var slots = sentences[i].slots;
             var slotsCnt = slots.length - 1;
@@ -261,18 +302,9 @@ $(function () {
                     hoverClass: 'hovered',
                     drop: HandleCardDrop
                 });
-                if (slots[j].content == "question") {
-                    $("#slot" + i + '_' + j).addClass("question");
-                }
-                else {
-                    if (slots[j].type != "shape")
-                    {
-                        $("#slot" + i + '_' + j).addClass(slots[j].type).text(slots[j].content_h);
-                    }                        
-                    else {
-                        $("<div class='" + slots[j].content.type + " " + slots[j].content.color + " centered'></div>").appendTo("#slot" + i + '_' + j);
-                    }
-                }
+
+                var slotId = "#slot" + i + '_' + j;              
+                drowCardContent(slots[j], slotId);
             }
             $('<div></div>').addClass('sentence-margin').insertAfter('#sentence' + i);
         }
@@ -287,17 +319,49 @@ $(function () {
                 cursor: 'move',
                 revert: true
             });
-            if (cards[i].type != "shape") {
-                $("#card" + i).addClass(cards[i].type).text(cards[i].content_h);
-            }
-            else {
-                $("<div class='" + cards[i].content.type + " " + cards[i].content.color + " centered'></div>").appendTo("#card" + i);
-                if (cards[i].content.type == "triangle") {
-                    var color = $("#card" + i + " > div").css("background-color");
-                    $("#card" + i + " > div").css("background", "none").css("color", color);
-                }
-            }
+
+                var cardId = "#card" + i;              
+                drowCardContent(cards[i], cardId);
+            // if (cards[i].type != "shape") {
+            //     $("#card" + i).addClass(cards[i].type).text(cards[i].content_h);
+            // }
+            // else {
+            //      $("#card" + i).addClass(cards[i].type);
+            //     $("<div class='" + cards[i].content.type + " " + cards[i].content.color + " centered'></div>").appendTo("#card" + i);
+            //     if (cards[i].content.type == "triangle") {
+            //         var color = $("#card" + i + " > div").css("background-color");
+            //         $("#card" + i + " > div").css("background", "none").css("color", color);
+            //     }
+            // }
         }
+    }
+
+    function drowCardContent(card, appentTo)
+    {        
+       if (card.content == "question") {
+                    $("<img src='images/rules/question.png'></img>").appendTo(appentTo);
+                    $(appentTo).addClass("question").addClass(card.type);
+                }
+                else {
+                        if(card.type == "conjunction")
+                        {
+                            $("<p>" + card.content_h + "</p>").appendTo(appentTo);
+                            $(appentTo).addClass(card.type);
+                        }
+                        else if (card.type == "shape"){
+                            $(appentTo).addClass(card.type);
+                            $("<div class='" + card.content.type + " " + card.content.color + " centered'></div>").appendTo(appentTo);
+                            if (card.content.type == "triangle") {
+                                var color = $(appentTo + " > div").css("background-color");
+                                $(appentTo + " > div").css("background", "none").css("color", color);
+                            }
+                        }
+                        else //icon for method or param
+                        {
+                            $("<img src='images/rules/" + card.content + ".png'></img>").appendTo(appentTo);
+                            $(appentTo).addClass(card.type);
+                        }                                          
+                }
     }
 
     function HandleCardDrop(event, ui) {
@@ -453,55 +517,54 @@ $(function () {
 
     }
 
-    //function ChangeDirection_ORG(shape1, shape2) {
-    //    var tmpx1 = shape1.x;
-    //    var tmpy1 = shape1.y;
-    //    var tmpx2 = shape2.x;
-    //    var tmpy2 = shape2.y;
-
-
-    //    var Del = shape2.r + shape1.r;
-    //    var dX = shape2.x - shape1.x;
-    //    var dY = shape2.y - shape1.y;
-    //    var dVX = shape2.vx - shape1.vx;
-    //    var dVY = shape2.vy - shape1.vy;
-    //    var dSq = dX * dX + dY * dY;
-    //    var elasticity = .8;//1;
-    //    var alpha = (1 + elasticity) / 2 * (dX * dVX + dY * dVY) / dSq;
-
-    //    shape1.vx += dX * alpha;
-    //    shape1.vy += dY * alpha;
-    //    shape2.vx -= dX * alpha;
-    //    shape2.vy -= dY * alpha;
-
-    //    var DDist = ((Del + 1) / Math.sqrt(dSq) - 1) / 2;
-    //    shape1.x -= dX * DDist;
-    //    shape1.y -= dY * DDist;
-    //    shape2.x += dX * DDist;
-    //    shape2.y += dY * DDist;
-    //}
-
     function ChangeDirection(shape1, shape2) {
-        var Del = shape2.r + shape1.r;
-        var dX = shape2.x - shape1.x;
-        var dY = shape2.y - shape1.y;
-        var dVX = shape2.vx - shape1.vx;
-        var dVY = shape2.vy - shape1.vy;
-        var dSq = dX * dX + dY * dY;
-        var elasticity = .8;//1;
-        var alpha = (1 + elasticity) / 2 * (dX * dVX + dY * dVY) / dSq;
+       var tmpx1 = shape1.x;
+       var tmpy1 = shape1.y;
+       var tmpx2 = shape2.x;
+       var tmpy2 = shape2.y;
 
-        shape1.vx += dX * alpha;
-        shape1.vy += dY * alpha;
-        shape2.vx -= dX * alpha;
-        shape2.vy -= dY * alpha;
+       var Del = shape2.r + shape1.r;
+       var dX = shape2.x - shape1.x;
+       var dY = shape2.y - shape1.y;
+       var dVX = shape2.vx - shape1.vx;
+       var dVY = shape2.vy - shape1.vy;
+       var dSq = dX * dX + dY * dY;
+       var elasticity = .8;//1;
+       var alpha = (1 + elasticity) / 2 * (dX * dVX + dY * dVY) / dSq;
 
-        var DDist = ((Del + 1) / Math.sqrt(dSq) - 1) / 2;
-        shape1.x -= dX * DDist;
-        shape1.y -= dY * DDist;
-        shape2.x += dX * DDist;
-        shape2.y += dY * DDist;
+       shape1.vx += dX * alpha;
+       shape1.vy += dY * alpha;
+       shape2.vx -= dX * alpha;
+       shape2.vy -= dY * alpha;
+
+       var DDist = ((Del + 1) / Math.sqrt(dSq) - 1) / 2;
+       shape1.x -= dX * DDist;
+       shape1.y -= dY * DDist;
+       shape2.x += dX * DDist;
+       shape2.y += dY * DDist;
     }
+
+    // function ChangeDirection_TEST(shape1, shape2) {
+    //     var Del = shape2.r + shape1.r;
+    //     var dX = shape2.x - shape1.x;
+    //     var dY = shape2.y - shape1.y;
+    //     var dVX = shape2.vx - shape1.vx;
+    //     var dVY = shape2.vy - shape1.vy;
+    //     var dSq = dX * dX + dY * dY;
+    //     var elasticity = .8;//1;
+    //     var alpha = (1 + elasticity) / 2 * (dX * dVX + dY * dVY) / dSq;
+
+    //     shape1.vx += dX * alpha;
+    //     shape1.vy += dY * alpha;
+    //     shape2.vx -= dX * alpha;
+    //     shape2.vy -= dY * alpha;
+
+    //     var DDist = ((Del + 1) / Math.sqrt(dSq) - 1) / 2;
+    //     shape1.x -= dX * DDist;
+    //     shape1.y -= dY * DDist;
+    //     shape2.x += dX * DDist;
+    //     shape2.y += dY * DDist;
+    // }
 
     function GetSlotOrCard(sentence, slotNum)
     {
@@ -681,7 +744,7 @@ $(function () {
               setTimeout(function () {
               if(checkSuccess == true)
                 {
-                     blinkOpenSidebarLight = setInterval(BlinkOpenLightColor, 400);
+                     blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
                 }
                
             }, 10000);
@@ -744,8 +807,7 @@ var blinkCloseSidebarLight;
              top: '-100%',    
         }, 1000);
            setTimeout(function () {
-               // BlinkOpenLightColor();
-               blinkOpenSidebarLight = setInterval(BlinkOpenLightColor, 400);
+               blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
             }, 1500);
     });
 
@@ -759,7 +821,7 @@ var blinkCloseSidebarLight;
              top: '-100%',    
         }, 1000);
            setTimeout(function () {
-               blinkOpenSidebarLight = setInterval(BlinkOpenLightColor, 400);
+               blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
             }, 1500);
     });
 

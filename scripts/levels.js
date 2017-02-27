@@ -8,6 +8,10 @@ var config = {
 
 $(function () {
     drawLevels();
+
+    $("#play-div").click(function(){
+        showLevels();
+    });
 });
 
 function drawLevels()
@@ -54,8 +58,8 @@ function drawLevels()
 }
 
     function GetLevelNum()
-    {//TODO: take level from db
-
+    {
+        //TODO: take level from db
         var levelNum = window.location.href.split('=')[1];
         return levelNum == undefined ? 0 : levelNum;
     }
@@ -70,7 +74,14 @@ function loader() {
 function showPage() {
     document.getElementById("loader").style.display = "none";
     document.getElementById("logo-div").style.display = "none";
-    //document.getElementById("levels-div").style.display = "block";
+    // document.getElementById("big-logo-div").style.display = "block";
+    // document.getElementById("play-div").style.display = "block";
+    $("#big-logo-div, #play-div").fadeIn( "slow" );
+   // $("#big-logo-div").show(500);
+}
+
+function showLevels()
+{
     var bodyHeight = $('body').height();
     var footerOffsetTop = $('#levels-div').offset().top;
     var topToBottom = bodyHeight - footerOffsetTop;
@@ -82,3 +93,8 @@ function showPage() {
         top: '0px',
     }, 3000);
 }
+
+
+
+
+

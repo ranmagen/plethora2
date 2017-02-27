@@ -69,6 +69,32 @@
     transform: translate(-50%, -50%);
 }
 
+#big-logo-div
+{
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    display: none;
+    font-size: 65px;
+}
+
+#play-div
+{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top:70%;
+    transform: translate(-50%, -50%);
+    font-size:25px;
+    text-align: center;
+}
+
+
+#big-logo {
+    width: 250px;
+}
+
 .wrap {
     /*bottom: 340px;*/
     bottom: 50%;
@@ -202,6 +228,8 @@
     box-shadow: 2px 4px 0px 4px #333232;
     position: absolute;
 }
+
+
 
 /*#inner-div
 {
