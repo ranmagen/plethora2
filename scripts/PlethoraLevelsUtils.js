@@ -201,9 +201,10 @@ $(function () {
             //insert init-level shapes to shapes array     
             for (var i = 0; i < level.shapes.length ; i++) {
                 var s = new shapeObj(level.shapes[i], GetPosition(shapes[i]));
+		    shapes.push(s);
             }
 
-            shapes.push(s);
+            
             $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
 
             //draw senteces  
