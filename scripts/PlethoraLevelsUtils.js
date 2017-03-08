@@ -427,7 +427,10 @@ $(function () {
                 if (sentence.completed == true) {
                     var whenShape = GetSlotOrCard(sentence, 1).content;
                     if (shape.Equal(whenShape)) {
-                        if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "wall") {
+                        var whenMethod = GetSlotOrCard(sentence, 2);
+                        var whenSecondShape = GetSlotOrCard(sentence, 3);
+                        //if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "wall") {
+                        if (whenMethod.content == "hit" && whenSecondShape.type == "wall") {
                             ExecuteAction(sentence, shape);
                         }
                     }
