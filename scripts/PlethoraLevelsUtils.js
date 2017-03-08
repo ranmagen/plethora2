@@ -630,12 +630,12 @@ $(function () {
         return { x: x, y: y };
     }
 
-    function GetSize(size) {
+     function GetSize(shape) {
         var w, h, r;
-        if (size == undefined) {
-                size = "medium";
+        if (shape.size == undefined) {
+                shape.size = "medium";
         }
-        switch (size) {
+        switch (shape.size) {
             case "medium":
                 {
                     if (shape.type == "circle") {
