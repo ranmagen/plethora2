@@ -630,24 +630,26 @@ $(function () {
         return { x: x, y: y };
     }
 
-     function GetSize(shape) {
+ function GetSize(shape) {
         var w, h, r;
         if (shape.size == undefined) {
-                shape.size = "medium";
+            shape.size = "medium";
         }
         switch (shape.size) {
             case "medium":
                 {
-                    if (shape.type == "circle") {
-                        w = h = r = 20;
+					// if(shape.type == "square")
+					// {
+						// w = h = 40;
+						// r = 40;
+                        // return { r: r, w: w, h: h };
+					// }
+					// else
+					// {
+						 w = h = r = 20;
                         return { r: r, w: w, h: h };
-                    }
-                    else if(shape.type == "square")
-                    {
-                                r = 20;
-                                w = h = 40;
-                        return { r: r, w: w, h: h };
-                    }
+					//}
+     
                 }
         }
 
