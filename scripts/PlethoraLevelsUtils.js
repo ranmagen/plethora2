@@ -35,8 +35,8 @@ $(function () {
         this.y = position.y;
         this.w = GetSize(shape).w;
         this.h = GetSize(shape).h;
-        this.vx = 10 * Math.random();
-        this.vy = 10 * Math.random();
+        this.vx = Math.floor(Math.random() * 9) + 6;//10 * Math.random();
+        this.vy = Math.floor(Math.random() * 9) + 6;//10 * Math.random();
         this.hitWallFlag = false;
         this.hitShapeFlag = false;
     }
