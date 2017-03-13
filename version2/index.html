@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.ui.touch-punch.min.js"></script>
+    <script src="scripts/PlethoraScript.js"></script>    
+    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+    <script src="scripts/drawLevelObjects.js"></script>
+     <script src="scripts/playgobridge.js"></script>
+    <script type="text/javascript" src="scripts/elastic-collision-bruteforce-strategy.js"></script>
+    <script src="scripts/PlethoraLevelsUtils.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/plethora.css">
+    <link rel="stylesheet" type="text/css" href="css/level.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <title>Plethora</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <input id="home-btn" type="image" src="images/home.png" />
+    <input id="reload-btn" type="image" src="images/reload.png" />
+    <div id="header">
+        <div id="level_name"></div>
+    </div>
+    <div class="containerDiv">
+        <div id="stageDiv">
+            <canvas></canvas>
+        </div>
+        <div id='limit-shapes'></div>
+        <div id="open-btn" class="right-sidebar-outer" >
+            <svg  height="100" width="40">
+                <circle id="open-light" cx="10" cy="50" r="10"  fill="#898989" />
+            </svg>
+        </div>   
+        <div id="sidebar" class="right-sidebar-outer shadow">
+            <div id="task"></div>
+            <div id="slots-container">
+            </div>
+            <div id="cards-container">
+            </div>
+        </div>
+        <div id="win_condition">
+            <p id="win_condition_text"></p>
+            <div id="ok_win_btn" class="plethora-btn centered">אוקיי</div>
+            <div id="win_condition_btn">
+                  <svg  height="100" width="100">
+                    <circle id="close_win_condition" cx="50" cy="30" r="10"  fill="#898989" />
+                 </svg>
+            </div>
+        </div>
+        <div id="move_to_next_lvl">
+            <p id="move_to_next_lvl_text">כל הכבוד!</p> 
+            <div id="next_lvl_btn" class="plethora-btn centered">לשלב הבא</div>           
+            <div id="move_to_next_lvl_btn">
+                  <svg  height="100" width="100">
+                    <circle id="close_move_to_next_lvl" cx="50" cy="30" r="10"  fill="#898989" />
+                 </svg>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
