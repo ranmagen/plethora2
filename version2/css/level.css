@@ -209,6 +209,7 @@
     {
         box-shadow: inset -4px 4px 0px 0 #969595;
         border:2px white solid;
+        box-sizing: border-box;
     }
 
 /****** Cards *****/
