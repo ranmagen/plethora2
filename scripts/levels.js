@@ -8,10 +8,7 @@ var config = {
 
 $(function () {
     drawLevels();
-
-    $("#play-div").click(function(){
-        showLevels();
-    });
+    showLevels();
 });
 
 function drawLevels()
@@ -43,7 +40,6 @@ function drawLevels()
         {
             levelType = 'locked';
         }
-
             var lvl = i + 1;
             $('<div><img class="level-img" src="images/levels/'+ levelType +'/level' + lvl + '.png"/><p class="level-name '
              +'">' + data.child(i).val().name + '</p></div>').attr('id',
@@ -66,19 +62,6 @@ function drawLevels()
 
 
 var myVar;
-
-function loader() {
-    myVar = setTimeout(showPage, 2000);
-}
-
-function showPage() {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("logo-div").style.display = "none";
-    // document.getElementById("big-logo-div").style.display = "block";
-    // document.getElementById("play-div").style.display = "block";
-    $("#big-logo-div, #play-div").fadeIn( "slow" );
-   // $("#big-logo-div").show(500);
-}
 
 function showLevels()
 {

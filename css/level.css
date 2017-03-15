@@ -1,9 +1,14 @@
 ﻿#level_name {
-    font-size: 20px;
-    position: absolute;
+
     left: 50%;
     transform: translate(-50%, -50%);
     /*padding-top: 40px;*/
+}
+
+.level-title
+{
+    font-size: 20px;
+    position: absolute;
 }
 
 #task {
@@ -205,6 +210,13 @@
         padding-top:10px;
     }
 
+    .question.shape, .question.wall
+    {
+        box-shadow: inset -4px 4px 0px 0 #969595;
+        border:2px white solid;
+        box-sizing: border-box;
+    }
+
 /****** Cards *****/
 #slots-container {
     position: absolute;
@@ -309,13 +321,14 @@ div.slot p {
 #win_condition, #move_to_next_lvl {
     /*display: none;*/
     background-color: #7799bb; /*#606060;*/
-    box-shadow: 5px 3px 0px 1px #5a759b;
+    /*box-shadow: 5px 3px 0px 1px #5a759b;*/
     width: 50%;
     height: 70%;
     position: absolute;
     top: -100%;
     left: 50%;
     transform: translate(-50%);
+    opacity: 0.9;
  /*transform: translate(-50%, -50%);*/
     /*border:30px solid #808080;*/
 }
@@ -330,8 +343,9 @@ div.slot p {
     top: 99% !important;
     left: 40%;
     z-index: 10000;
-    box-shadow: 4px 5px 0px 1px #5a759b;
-    cursor: pointer;
+    /*box-shadow: 4px 5px 0px 1px #5a759b;*/
+        /*opacity: 0.9;*/
+    /*cursor: pointer;*/
 }
 
 /*#close_win_condition
@@ -341,11 +355,12 @@ div.slot p {
 
 #win_condition_text, #move_to_next_lvl_text
 {
-    font-size: 60px;
+    font-size: 30px;
     text-align: center;
     line-height: 1;
     vertical-align: middle;
-    margin-top: 25%;
+    margin-top:150px;
+    /*margin-top: 30%;*/
 }
 
 #limit-shapes
@@ -353,4 +368,35 @@ div.slot p {
     position: absolute;
     top:94%;
     left: 60px;
+}
+
+.plethora-btn
+{
+    background-color: #dd4400;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-right: 80px;
+    padding-left: 80px;
+    font-size: 43px;
+    cursor: pointer;
+    box-shadow: -3px 3px 0px 1px #c43e03;    
+}
+
+#ok_win_btn, #next_lvl_btn
+{
+    margin-top:80px;
+}
+
+
+
+body {
+    animation: myfadeInAnimation 2s;
+}
+@keyframe myfadeInAnimation {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@-webkit-keyframes myfadeInAnimation {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
