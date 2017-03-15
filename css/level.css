@@ -1,4 +1,5 @@
-﻿#level_name {
+﻿
+#level_name {
 
     left: 50%;
     transform: translate(-50%, -50%);
@@ -341,8 +342,9 @@ div.slot p {
     height: 51px;
     position: absolute;
     top: 99% !important;
-    left: 40%;
+    left: 50%;
     z-index: 10000;
+    transform: translate(-50%, 0%);
     /*box-shadow: 4px 5px 0px 1px #5a759b;*/
         /*opacity: 0.9;*/
     /*cursor: pointer;*/
@@ -387,8 +389,6 @@ div.slot p {
     margin-top:80px;
 }
 
-
-
 body {
     animation: myfadeInAnimation 2s;
 }
@@ -400,3 +400,7 @@ body {
     from {opacity: 0;}
     to {opacity: 1;}
 }
+
+
+
+

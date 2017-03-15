@@ -20,19 +20,19 @@ for(var j=0;j<shapes.length;j++){
 		//	 setTimeout(resetColide(shape,shapes[i]),500);
 		
 		if(shape.x >= shapes[i].x){
-			shapes[i].vx = -3;
-			shape.vx = 3;
+			shapes[i].vx = -speed;
+			shape.vx = speed;
 		}else{
-			shapes[i].vx = 3;
-			shape.vx = -3;
+			shapes[i].vx = speed;
+			shape.vx = -speed;
 		}
 
 		if(shape.y >= shapes[i].y){
-					shapes[i].vy = -3;
-					shape.vy = 3;
+					shapes[i].vy = -speed;
+					shape.vy = speed;
 				}else{
-				shapes[i].vy = 3;
-					shape.vy = -3;
+				shapes[i].vy = speed;
+					shape.vy = -speed;
 				}
 		}
 		// if((c2cDist + gap ) > (shapes[i].r + shape.r)){

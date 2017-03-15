@@ -63,10 +63,18 @@
 }
 
 #logo-div {
-    position: absolute;
-    left: 50%;
-    top: 10%;
-    transform: translate(-50%, -50%);
+    /*position: absolute;
+    right: 90%;
+    top: 7%;
+    transform: translate(-50%, -50%);*/
+float: left;
+margin-left:4%;
+padding-top:1%;
+}
+
+canvas
+{
+    background: green !important;
 }
 
 #big-logo-div

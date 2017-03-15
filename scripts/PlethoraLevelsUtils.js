@@ -30,7 +30,9 @@ $(function () {
     ctx.canvas.height = window.innerHeight - $("#header").height();
     ctx.fillStyle = '#00031a';
     var limitShapes;
+    //alert($( window ).height()*0.05);
     var container = { x: 60, y: 10, width: ctx.canvas.width - 130, height: ctx.canvas.height - 60 };
+
     ctx.fillRect(container.x, container.y, container.width, container.height);
     firebase.initializeApp(config);
 
@@ -295,7 +297,7 @@ $(function () {
                             shape.hitWallFlag = true;
                             setTimeout(function () {
                                 shape.hitWallFlag = false;
-                            }, 500);
+                            }, 200);
                             ExecuteAction(sentence, shape);
                         }
                     }
@@ -489,8 +491,7 @@ $(function () {
     function ClearLevel() {
         $("#slots-container div").remove();
         $("#cards-container div").remove();
-        ctx.fillStyle = 'grey';
-        ctx.strokeStyle = 'grey';
+        ctx.fillStyle = '#00031a';
         ctx.fillRect(container.x, container.y, container.width, container.height);
         sentences = [];
         shapes = [];
@@ -564,8 +565,31 @@ $(function () {
             $("#win_condition_btn").delay(100).animate({
              top: '0px',
         }, 750);
+        setTimeout(function () {
+                setShapesSpeed(1.5);
+                blurPage();
+            }, 750);
+       
     }
 
+    function setShapesSpeed(newSpeed)
+    {
+        for(i in shapes){
+            shapes[i].vx = shapes[i].vy = newSpeed;
+            speed = newSpeed;
+        }
+    }
+
+function blurPage()
+{
+    canvas.style.webkitFilter = "blur(3px)";
+}
+
+function unBlurPage()
+{
+    canvas.style.webkitFilter = "blur(0px)";
+}
+ 
     var blinkOpenSidebarLight;
     var blinkCloseSidebarLight;
 
@@ -578,6 +602,10 @@ $(function () {
            setTimeout(function () {
                blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
             }, 1500);
+       setTimeout(function () {
+            setShapesSpeed(3);
+            unBlurPage();
+        }, 750);
     });
 
 
@@ -625,4 +653,7 @@ $(function () {
         
     }
 });
+
+
+
 
