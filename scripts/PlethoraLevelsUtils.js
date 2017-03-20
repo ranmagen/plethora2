@@ -18,6 +18,7 @@ var config = {
  var gap = .5;
  var speed = 3;
  var closeTaskTray = false;
+ var checkSuccessFlag = false;
 
 $(function () {
     var pause = "";
@@ -49,8 +50,10 @@ $(function () {
         this.y = y;
         this.w = GetSize(size, type).w;
         this.h = GetSize(size, type).h;
-        this.vx = vx;// 10 * Math.random();
-        this.vy = vy;//10 * Math.random();
+        // this.vx = vx;// 10 * Math.random();
+        // this.vy = vy;//10 * Math.random();
+        this.vx = getRandom(vx-1, vx+1);
+        this.vy = getRandom(vy-1, vy+1);
         this.hitWallFlag = false;
         this.hitShapeFlag = false;
     }
@@ -65,19 +68,34 @@ $(function () {
     Shape.prototype.Created = function () {
         if (shapes.length < limitShapes)
         {
-             shapes.push(this);
-             $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
+            shapes.push(this);
+            SetShapesCurrentState();
+            // $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
         }
     }
 
-    Shape.prototype.Remove = function () {
-        shapes = jQuery.grep(shapes, function (value) {
-            return value != this;
-        });
+    Shape.prototype.Deleted = function () {   
+        var currentShape = this;   
+            shapes = jQuery.grep(shapes, function (value) {
+                 return !value.Equal(currentShape);//value != this;
+       });
+        SetShapesCurrentState();
     }
 
     Shape.prototype.ChangeColor = function (newColor) {
         this.color = newColor;
+    }
+
+    function SetShapesCurrentState()
+    {
+        var circle = {type:"circle", color:"color4"};
+        var triangle = {type:"triangle", color:"color6"};
+        var square = {type:"square", color:"color5"};
+        var circleCnt = CountShapes(circle);
+        var triangleCnt = CountShapes(triangle);
+        var squareCnt = CountShapes(square);
+        var shapesCntString = "עיגולים: " + circleCnt + " | משולשים: " + triangleCnt + " | ריבועים: " + squareCnt;
+        $("#limit-shapes").text(shapesCntString);
     }
 
     var slotObj = function (slot) {
@@ -114,7 +132,11 @@ $(function () {
     function draw() {
             ctx.fillStyle = '#00031a';
             ctx.fillRect(container.x, container.y, container.width, container.height);
-            CheckSuccess();
+            if(checkSuccessFlag)
+            {              
+                CheckSuccess();
+            }
+            
             CollisionStrategy(shapes);
 
             for (var i = 0; i < shapes.length; i++) {
@@ -184,52 +206,38 @@ $(function () {
                         }
                     }
                 }
-                shapes[i].x += shapes[i].vx;
-                shapes[i].y += shapes[i].vy;
-            }
-          
+                if(shapes.length > 0)
+                {
+                    shapes[i].x += shapes[i].vx;
+                    shapes[i].y += shapes[i].vy;
+                }
+            
+            }          
         pause = requestAnimationFrame(draw);
     }
 
     let level = null;
 
     function LevelSetup() {
-
         $("#open-light").css({ fill: "#898989" });
         var dbRef = firebase.database().ref('levels');
 
         dbRef.once("value", function (data) {
         level = data.val()[levelNum];
            $("#level_num").text(level.name);
-        limitShapes = level.limitShapes == undefined ? 70 : level.limitShapes;
+        limitShapes = level.limitShapes == undefined ? 70 : level.limitShapes;        
         $("#win_condition_text").text(level.task);
-
-        //insert init-level shapes to shapes array
-        // for (var i = 0; i < level.shapes.length ; i++) {
-        //     var size = level.shapes[i].size == undefined ? "medium" : level.shapes[i].size;
-        //     var cx = Math.floor((Math.random() * (container.width-10)),10);
-	    //     var cy = Math.floor((Math.random() * (container.height-10)),10);
-        //     shapes.push(new Shape(i, level.shapes[i].type, level.shapes[i].color, size, cx, cy, 3, 3));
-        // }
-        //  for (var i = 0; i < 10 ; i++) {
-        //for (var i = 0; i < level.shapes.length ; i++) {
-            for (i in level.shapes) {
-                
-            var size = level.shapes[i].size == undefined ? "medium" : level.shapes[i].size; 
-            //var cx = Math.floor((Math.random() * (container.width-10)),10);
-	        //var cy = Math.floor((Math.random() * (container.height-10)),10);
-            //min_x: container.x + shape.r
-            //max_x: container.width + container.x - shape.r
-            //min_y: container.y + radius (30)
-            //max_y: container.height- container.y (508)
-         
+        
+        for (i in level.shapes) {                
+            var size = level.shapes[i].size == undefined ? "medium" : level.shapes[i].size;         
             var radius = GetSize(size, level.shapes[i].type).r;  
             var cx = Math.floor(Math.random() * ((container.width  - radius  - radius)+1) + container.x + radius);
             var cy = Math.floor(Math.random() * ((container.height - container.y-container.y - radius)+1) + container.y + radius);
             shapes.push(new Shape(i, level.shapes[i].type, level.shapes[i].color, size, cx, cy, speed, speed));
         }
 
-        $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
+       // $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
+       SetShapesCurrentState();
 
         //draw senteces
         InitSentences(level.sentences);
@@ -243,7 +251,7 @@ $(function () {
         successCriterions = level.successCriterions;
 
         //start animation
-        draw();
+        draw();      
         setTimeout(showWinCondition, 1000);
         });
     }
@@ -332,6 +340,11 @@ $(function () {
                     }, 250);
                     break;
                 }
+                case "deleted":
+                {     
+                    shape.Deleted();
+                    break;
+                }
             case "change_color":
                 {
                     if (shape.Equal(whenShape)) {
@@ -343,9 +356,7 @@ $(function () {
         }
     }
 
-    function getRandom(min, max) {
-    return min + Math.floor(Math.random() * (max - min + 1));
-    }
+  
 
     function GetSlotOrCard(sentence, slotNum)
     {
@@ -427,19 +438,23 @@ $(function () {
         return Math.sqrt((diffX * diffX) + (diffY * diffY));
     }
 
-
     function CheckSuccess() {
         var isSuccess = true;
         for (var i = 0; i < successCriterions.length; i++) {
             isSuccess = isSuccess && CheckSuccessCriterion(successCriterions[i]);
+           
         }
         if (isSuccess == true) {
+            checkSuccessFlag = false;
+
+        for (s in sentences) {
+            sentences[s].completed = false;
+        }
+
             setTimeout(function () {
-                if (checkSuccess == true) {
-                    //clearInterval(blinkOpenSidebarLight);
-                    checkSuccess = false;
-                   // $("#move_to_next_lvl").show();
-                   showLevelComplete();
+                if (checkSuccess == true) {                   
+                    checkSuccess = false;                
+                    showLevelComplete();
                     cancelAnimationFrame(pause);
                     clearInterval(blinkOpenSidebarLight);
                 }
@@ -448,36 +463,71 @@ $(function () {
     }
 
     function CheckSuccessCriterion(successCriterion) {
+
         switch(successCriterion.method)
         {
             case "equal":
-                {
+                {                  
                     var cnt = 0;
-                    if (successCriterion.amount != undefined) {
-                        for (var i = 0; i < shapes.length; i++) {
-                            if (shapes[i].Equal(successCriterion.shape1)) {
-                                cnt++;
-                                if (cnt == successCriterion.amount) {
-                                    for (var j = 0; j < sentences.length; j++) {
-                                        sentences[j].completed = false;
-                                    }
-                                    return true;
-                                }
-
-                            }
+                    if (successCriterion.amount != undefined) {                      
+                        if(CountShapes(successCriterion.shape1) == successCriterion.amount)
+                        {        
+                            return true;
                         }
+                        // for (var i = 0; i < shapes.length; i++) {
+                        //     if (shapes[i].Equal(successCriterion.shape1)) {
+                        //         cnt++;
+                        //         if (cnt == successCriterion.amount) {
+                        //             for (var j = 0; j < sentences.length; j++) {
+                        //                 //sentences[j].completed = false;
+                        //             }
+                        //             return true;
+                        //         }
+
+                        //     }
+                        // }
                     }
+                    break;
+                }
+                case "greater-equal":
+                {
+                       if(CountShapes(successCriterion.shape1) >= successCriterion.amount)
+                        {        
+                            return true;
+                        }
                     break;
                 }
             case "greater":
                 {
+                       if(CountShapes(successCriterion.shape1) > successCriterion.amount)
+                        {        
+                            return true;
+                        }
                     break;
                 }
             case "less":
                 {
+                       if(CountShapes(successCriterion.shape1) < successCriterion.amount)
+                        {        
+                            return true;
+                        }
                     break;
                 }
         }
+        return false;
+    }
+
+    function CountShapes(shape)
+    {     
+        cnt = 0;
+        for(s in shapes)
+        {             
+           if(shapes[s].Equal(shape))
+           {
+               cnt++;
+           }
+        }        
+        return cnt;
     }
 
     // $("#move_to_next_lvl").click(function () {
@@ -513,17 +563,18 @@ $(function () {
                 }
                 else //close sidebar
                 {
-                if (checkSuccess == true)
-                {
-                    setTimeout(function () {
-                    if(checkSuccess == true)
-                        {
-                            blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
-                        }
+                      checkSuccessFlag = true;
+                    if (checkSuccess == true)
+                    {
+                        setTimeout(function () {
+                        if(checkSuccess == true)
+                            {
+                                blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
+                            }
 
-                    }, 10000);
+                        }, 10000);
 
-                }
+                    }
                     setTimeout(function () {
                         pause = requestAnimationFrame(draw);
                     }, 500);
@@ -618,39 +669,44 @@ function unBlurPage()
         window.location.href = "levels.html?level=" + levelNum;
     });
 
-    function FixShapesAnimation()
-    {
+    // function FixShapesAnimation()
+    // {
   
-        for(var j=0 ; j<shapes.length ; j++){
-            for(var i=j+1 ; i<shapes.length ; i++){
-                if(shapes[j].id == shapes[i].id){
-                    continue;
-                }
+    //     for(var j=0 ; j<shapes.length ; j++){
+    //         for(var i=j+1 ; i<shapes.length ; i++){
+    //             if(shapes[j].id == shapes[i].id){
+    //                 continue;
+    //             }
                 
-                if(GetDistance(shapes[i].x, shapes[i].y, shapes[j].x, shapes[j].y) < shapes[i].r+ shapes[j].r)
-                {
-                    if(shapes[i].x > shapes[j].x)
-                    {
-                        shapes[i].x += shapes[i].x - shapes[j].x + gap;                    
-                    }
-                    // else if(shapes[i].x < shapes[j].x)
-                    {
-                        shapes[i].x -= shapes[j].x - shapes[i].x + gap;                    
-                    }
+    //             if(GetDistance(shapes[i].x, shapes[i].y, shapes[j].x, shapes[j].y) < shapes[i].r+ shapes[j].r)
+    //             {
+    //                 if(shapes[i].x > shapes[j].x)
+    //                 {
+    //                     shapes[i].x += shapes[i].x - shapes[j].x + gap;                    
+    //                 }
+    //                 // else if(shapes[i].x < shapes[j].x)
+    //                 {
+    //                     shapes[i].x -= shapes[j].x - shapes[i].x + gap;                    
+    //                 }
 
-                       if(shapes[i].y > shapes[j].y)
-                    {
-                        shapes[i].y += shapes[i].y - shapes[j].y + gap;                    
-                    }
-                    else if(shapes[i].y < shapes[j].y)
-                    {
-                        shapes[i].y -= shapes[j].y - shapes[i].y + gap;                    
-                    }
+    //                    if(shapes[i].y > shapes[j].y)
+    //                 {
+    //                     shapes[i].y += shapes[i].y - shapes[j].y + gap;                    
+    //                 }
+    //                 else if(shapes[i].y < shapes[j].y)
+    //                 {
+    //                     shapes[i].y -= shapes[j].y - shapes[i].y + gap;                    
+    //                 }
                     
-                }
-            }
-        }
+    //             }
+    //         }
+    //     }
         
+    // }
+
+      function getRandom(min, max) {
+       // return min + Math.floor(Math.random() * (max - min + 1));
+        return min + Math.random() * (max - min + 1);
     }
 });
 
