@@ -1,36 +1,66 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<!--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
-<script src="scripts/jquery-3.1.1.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script>
-$(document).on("pagecreate",function(event){
 
-  $(window).on("orientationchange",function(event){
-    alert("Orientation changed to: " + event.orientation);
-  });                     
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--<script src="scripts/jquery-3.1.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="scripts/home.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+
+<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/levels.css">
+    <link rel="stylesheet" type="text/css" href="css/plethora.css">
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+
+    <link rel="shortcut icon" href="images/icon.ico">
+    <meta charset="utf-8" />
+    <title>Plethora - Home</title>
+
+<script>  
+$(document).on("pagecreate",function(event){
+ 
+  $(window).on("orientationchange",function(){
+    if(window.orientation == 0)
+    {
+      alert("Orientation changed to: " + event.orientation);
+    }
+    else
+    {
+      alert("Orientation changed to: " + event.orientation);
+    }
+  });                   
 });
 </script>
+
 </head>
-<body>
+<body onload="loader()" style="margin:0;">
+    <!--<div id="logo-div">
+        <img id="logo" src="images/logo.png" />
+        <div>Plethora</div>
+    </div>-->
+    <div id="loader" class="wrap red">
+        <div class="shadow"></div>
+        <div class="ball"></div>
+    </div>
+  
+    <div id="big-logo-div">
+        <img id="big-logo" src="images/logo_shadow.png" />
+        <div>Plethora</div>
+    </div>
+    <div id="play-div">
+        <img src="images/play.png"/>
+        <p>בואו נשחק!</p>
+    </div>
 
-<div data-role="page">
-  <div data-role="header">
-    <h1>The orientationchange Event</h1>
-  </div>
 
-  <div data-role="main" class="ui-content">
-    <p>Try to rotate your device!</p>
-    <p><b>Note:</b> You must use a mobile device, or a mobile emulator to see the effect of this event.</p>
-  </div>
+    <!--<div id="test" style="width: 200px;height: 200px;border: 2px red solid" class="leftHighlight bottomHighlight upperShadow rightShadow StageAlpha"></div>-->
 
-  <div data-role="footer">
-    <h1>Footer Text</h1>
-  </div>
-</div> 
-
+    <div id="levels-div">
+        <div id="levels-container">
+        </div>
+    </div>
 </body>
 </html>
