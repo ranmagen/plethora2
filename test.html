@@ -21,17 +21,17 @@
 
 <script>  
 $(document).on("pagecreate",function(event){
- 
-  $(window).on("orientationchange",function(){
-    if(window.orientation == 0)
-    {
-      alert("Orientation changed to: " + event.orientation);
-    }
-    else
-    {
-      alert("Orientation changed to: " + event.orientation);
-    }
-  });                   
+ alert("Orientation is: " + event.orientation);
+//   $(window).on("orientationchange",function(){
+//     if(window.orientation == 0)
+//     {
+//       alert("Orientation changed to: " + event.orientation);
+//     }
+//     else
+//     {
+//       alert("Orientation changed to: " + event.orientation);
+//     }
+//   });                   
 });
 </script>
 
