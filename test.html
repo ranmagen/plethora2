@@ -20,18 +20,22 @@
     <title>Plethora - Home</title>
 
 <script>  
+if(window.innerHeight > window.innerWidth){
+    alert("Please use Landscape!");
+}
+
 $(document).on("pagecreate",function(event){
- alert("Orientation is: " + event.orientation);
-//   $(window).on("orientationchange",function(){
-//     if(window.orientation == 0)
-//     {
-//       alert("Orientation changed to: " + event.orientation);
-//     }
-//     else
-//     {
-//       alert("Orientation changed to: " + event.orientation);
-//     }
-//   });                   
+ 
+  $(window).on("orientationchange",function(){
+    if(window.orientation == 0)
+    {
+      alert("(if) Orientation changed to: " + event.orientation);
+    }
+    else
+    {
+      alert("(else) Orientation changed to: " + event.orientation);
+    }
+  });                   
 });
 </script>
 
