@@ -560,10 +560,12 @@ $(function () {
                 {
                     cancelAnimationFrame(pause);
                     clearInterval(blinkOpenSidebarLight);
+                    blurPage();
                 }
                 else //close sidebar
                 {
-                      checkSuccessFlag = true;
+                    unBlurPage();
+                    checkSuccessFlag = true;
                     if (checkSuccess == true)
                     {
                         setTimeout(function () {
@@ -599,7 +601,6 @@ $(function () {
         return levelNum == undefined ? 0 : levelNum;
     }
 
-
     function showLevelComplete(){
         $("#move_to_next_lvl").delay(100).animate({
              top: '0px',
@@ -607,6 +608,7 @@ $(function () {
         $("#move_to_next_lvl_btn").delay(100).animate({
              top: '0px',
         }, 2000);
+        blurPage();
     }
 
     function showWinCondition(){
