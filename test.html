@@ -24,11 +24,13 @@
         $(window).on("orientationchange",function(){
             if(window.orientation == 0) //profile
             {
+                alert("profile");
                hidePage();
             //alert("(if) Orientation changed to: " + event.orientation);
             }
             else //landscape
             {
+                alert("profile");
                 $("#rotate-img").hide();
                 $("#loader").show();
                 $("#big-logo-div").show();
