@@ -47,24 +47,7 @@ function checkMobileOrientation()
 
 }
 
-    $(document).on("pagecreate",function(event){ 
-        $(window).on("orientationchange",function(){
-            if(window.orientation == 0)
-            {
-            //   hidePage();
-            alert("(if) Orientation changed to: " + event.orientation);
-            }
-            else
-            {
-                // $("#rotate-img").hide();
-                // $("#loader").show();
-                // $("#big-logo-div").show();
-                // $("#play-div").show();
-                // myVar = setTimeout(showPage, 2000);
-            alert("(else) Orientation changed to: " + event.orientation);
-            }
-        });                   
-    });
+
 
 
 
