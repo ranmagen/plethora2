@@ -35,7 +35,7 @@ function showPage() {
 function checkMobileOrientation()
 {    
     if(window.innerHeight > window.innerWidth){
-     //   alert("Landscape");
+       alert("profile - on load");
        hidePage();
         //alert("Please use Landscape!");
     }
