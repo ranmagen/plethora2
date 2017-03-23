@@ -41,6 +41,8 @@ body {
     margin-top: 10px;
 }
 
+
+
 #reload-btn {
     width: 40px;
     cursor: pointer;
@@ -170,6 +172,21 @@ body {
     }
 }
 
+
+
+#logo-div {
+    /*position: absolute;
+    right: 90%;
+    top: 7%;
+    transform: translate(-50%, -50%);*/
+float: left;
+margin-left:4%;
+padding-top:1%;
+}
+
+#logo {
+    width: 55px;
+}
 
 
 

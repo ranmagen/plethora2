@@ -31,12 +31,10 @@ $(function () {
     ctx.canvas.height = window.innerHeight - $("#header").height();
     ctx.fillStyle = '#00031a';
     var limitShapes;
-    //alert($( window ).height()*0.05);
     var container = { x: 60, y: 10, width: ctx.canvas.width - 130, height: ctx.canvas.height - 60 };
 
     ctx.fillRect(container.x, container.y, container.width, container.height);
     firebase.initializeApp(config);
-
 
  /***********************************************************/
  /*                       Shape Class                       */
@@ -667,7 +665,7 @@ function unBlurPage()
             window.location.href = "levels.html?level=" + levelNum;
     });
 
-        $("#home-btn").click(function () {
+        $("#logo-div").click(function () {
         window.location.href = "levels.html?level=" + levelNum;
     });
 

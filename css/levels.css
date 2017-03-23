@@ -38,8 +38,8 @@
 
 #levels-container {
     position: absolute;
-    top: 33%;
-    /*top:140px;*/
+    /*top: 33%;*/
+
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -50,31 +50,12 @@
 @media screen and (max-width: 1024px) {
     #levels-container {
         /*top: 45%;*/
-        margin-top:50px;
+        /*margin-top:50px;*/
     }
 
     .level-img {
     width: 95px;
     }
-}
-
-#logo {
-    width: 55px;
-}
-
-#logo-div {
-    /*position: absolute;
-    right: 90%;
-    top: 7%;
-    transform: translate(-50%, -50%);*/
-float: left;
-margin-left:4%;
-padding-top:1%;
-}
-
-canvas
-{
-    background: green !important;
 }
 
 #big-logo-div
@@ -209,7 +190,7 @@ canvas
     height: 80%;
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-top:10%;
+    /*margin-top:10%;*/
 }
 
 #levels-div {

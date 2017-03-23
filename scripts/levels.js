@@ -74,7 +74,7 @@ function showLevels()
     });
     $("#levels-div").delay(100).animate({
         top: '0px',
-    }, 3000);
+    }, 1500);
 }
 
 
