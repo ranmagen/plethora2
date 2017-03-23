@@ -19,26 +19,6 @@
     <meta charset="utf-8" />
     <title>Plethora - Home</title>
 
-<script>  
-if(window.innerHeight > window.innerWidth){
-    alert("Please use Landscape!");
-}
-
-$(document).on("pagecreate",function(event){
- 
-  $(window).on("orientationchange",function(){
-    if(window.orientation == 0)
-    {
-      alert("(if) Orientation changed to: " + event.orientation);
-    }
-    else
-    {
-      alert("(else) Orientation changed to: " + event.orientation);
-    }
-  });                   
-});
-</script>
-
 </head>
 <body onload="loader()" style="margin:0;background-color: #7799bb !important">
     <!--<div id="logo-div">
