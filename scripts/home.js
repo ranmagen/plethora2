@@ -35,6 +35,7 @@ function showPage() {
 function checkMobileOrientation()
 {    
     if(window.innerHeight > window.innerWidth){
+        alert("Landscape");
        hidePage();
         //alert("Please use Landscape!");
     }
