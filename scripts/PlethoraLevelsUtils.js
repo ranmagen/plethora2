@@ -73,10 +73,20 @@ $(function () {
     }
 
     Shape.prototype.Deleted = function () {   
-        var currentShape = this;   
-            shapes = jQuery.grep(shapes, function (value) {
-                 return !value.Equal(currentShape);//value != this;
-       });
+    //     var currentShape = this;   
+    //         shapes = jQuery.grep(shapes, function (value) {
+    //              return !value.Equal(currentShape);//value != this;
+    //    });
+        for(var i in shapes)
+        {
+            if(shapes[i].id == this.id)
+            {
+                shapes.splice(i,1);
+                return;
+            }
+        }
+
+   
         SetShapesCurrentState();
     }
 
