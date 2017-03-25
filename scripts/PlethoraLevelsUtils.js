@@ -54,6 +54,7 @@ $(function () {
         this.vy = getRandom(vy-1, vy+1);
         this.hitWallFlag = false;
         this.hitShapeFlag = false;
+        this.delete = false;
     }
 
     Shape.prototype.Equal = function (shape) {
@@ -72,22 +73,16 @@ $(function () {
         }
     }
 
-    Shape.prototype.Deleted = function () {   
-    //     var currentShape = this;   
-    //         shapes = jQuery.grep(shapes, function (value) {
-    //              return !value.Equal(currentShape);//value != this;
-    //    });
-        for(var i in shapes)
-        {
-            if(shapes[i].id == this.id)
-            {
-                shapes.splice(i,1);
-                return;
-            }
-        }
-
-   
-        SetShapesCurrentState();
+    Shape.prototype.Deleted = function () {  
+        this.delete = true;
+        // for(var i in shapes)
+        // {
+        //     if(shapes[i].id == this.id)
+        //     {
+        //         shapes.splice(i,1);
+        //     }
+        // }   
+        // SetShapesCurrentState();
     }
 
     Shape.prototype.ChangeColor = function (newColor) {
@@ -148,6 +143,20 @@ $(function () {
             CollisionStrategy(shapes);
 
             for (var i = 0; i < shapes.length; i++) {
+                if(shapes[i].delete)
+                {
+                     for(var j in shapes)
+                    {
+                        if(shapes[j].id == shapes[i].id)
+                        {
+                            shapes.splice(i,1);
+                        }
+                    }   
+                    SetShapesCurrentState();
+                    continue;
+                }
+
+
                 ctx.fillStyle = GetColor(shapes[i].color);
                 ctx.beginPath();
                 switch (shapes[i].type) {
@@ -349,13 +358,15 @@ $(function () {
                     break;
                 }
                 case "deleted":
-                {     
-                    shape.Deleted();
+                {  
+                    if (shape.Equal(thenShape.content)) {  
+                        shape.Deleted();
+                    }
                     break;
                 }
             case "change_color":
                 {
-                    if (shape.Equal(whenShape)) {
+                    if (shape.Equal(whenShape.content)) {
                         var newColor = GetSlotOrCard(sentence, thenSlotNum + 3).content;
                         shape.ChangeColor(newColor);
                     }

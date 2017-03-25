@@ -24,17 +24,17 @@
         $(window).on("orientationchange",function(){
             if(window.orientation == 0) //profile
             {
-                alert("profile");
+                //alert("profile");
                hidePage();
             //alert("(if) Orientation changed to: " + event.orientation);
             }
             else //landscape
             {
-                alert("profile");
+                //alert("profile");
                 $("#rotate-img").hide();
-                $("#loader").show();
-                $("#big-logo-div").show();
-                $("#play-div").show();
+               // $("#loader").show();
+                //$("#big-logo-div").show();
+                //$("#play-div").show();
                 myVar = setTimeout(showPage, 2000);
             //alert("(else) Orientation changed to: " + event.orientation);
             }
