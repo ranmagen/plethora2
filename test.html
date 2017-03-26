@@ -27,7 +27,10 @@ function hideAddressBar()
           document.body.style.height = (window.outerHeight + 50) + 'px';
       }
 
-      setTimeout( function(){ alert("in"); window.scrollTo(0, 1); }, 50 );
+      setTimeout( function(){ alert("b4: " + window.scrollY); 
+                            window.scrollTo(0, 1); 
+                             alert("after: " + window.scrollY);
+                            }, 50 );
   }
 }
 
