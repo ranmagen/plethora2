@@ -18,24 +18,24 @@
 <script> 
 
 
-function hideAddressBar()
-{
-  if(!window.location.hash)
-  {
-      if(document.height < window.outerHeight)
-      {
-          document.body.style.height = (window.outerHeight + 50) + 'px';
-      }
+// function hideAddressBar()
+// {
+//   if(!window.location.hash)
+//   {
+//       if(document.height < window.outerHeight)
+//       {
+//           document.body.style.height = (window.outerHeight + 50) + 'px';
+//       }
 
-      setTimeout( function(){ alert("b4: " + window.scrollY); 
-                            window.scrollTo(0, 10); 
-                             alert("after: " + window.scrollY);
-                            }, 50 );
-  }
-}
+//       setTimeout( function(){ alert("b4: " + window.scrollY); 
+//                             window.scrollTo(0, 1); 
+//                              alert("after: " + window.scrollY);
+//                             }, 50 );
+//   }
+// }
 
-window.addEventListener("load", function(){ if(!window.pageYOffset){ hideAddressBar(); } } );
-window.addEventListener("orientationchange", hideAddressBar );
+// window.addEventListener("load", function(){ if(!window.pageYOffset){ hideAddressBar(); } } );
+// window.addEventListener("orientationchange", hideAddressBar );
 
     $(document).on("pagecreate",function(event){ 
         $(window).on("orientationchange",function(){
@@ -66,6 +66,17 @@ window.addEventListener("orientationchange", hideAddressBar );
 
 </head>
 <body onload="loader()" style="margin:0;background-color: #7799bb !important">
+
+
+<button id="goFS">Go fullscreen</button>
+<script>
+  var goFS = document.getElementById("goFS");
+  goFS.addEventListener("click", function() {
+      document.body.requestFullscreen();
+  }, false);
+</script>
+
+
     <div id="loader" class="wrap red">
         <div class="shadow"></div>
         <div class="ball"></div>
