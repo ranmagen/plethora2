@@ -8,12 +8,12 @@ function OrientationChange()
         $(window).on("orientationchange",function(){
             if(window.orientation == 0) //profile
             {
-                alert("profile");
+                //alert("profile");
                 $("#overlay").show();
             }
             else //landscape
             {
-                alert("landscape");
+                //alert("landscape");
                 $("#overlay").hide();
             }
         });                   
