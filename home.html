@@ -2,64 +2,51 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="theme-color" content="#7799bb" />
-     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Varela+Round:300,400,600,700&amp;lang=he" />
-    <script src="scripts/jquery-3.1.1.min.js"></script>
+     <meta name="theme-color" content="#7799bb" />
+    <!--<script src="scripts/jquery-3.1.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="scripts/home.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
-
     <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-
+ <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/levels.css">
     <link rel="stylesheet" type="text/css" href="css/plethora.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
-
     <link rel="shortcut icon" href="images/icon.ico">
     <meta charset="utf-8" />
-    <title>plethora - Home</title>
+    <title>Plethora - Home</title>
 
-<script>  
-$(document).on("pagecreate",function(event){
- 
-  $(window).on("orientationchange",function(){
-    if(window.orientation == 0)
-    {
-      alert("Orientation changed to: " + event.orientation);
-    }
-    else
-    {
-      alert("Orientation changed to: " + event.orientation);
-    }
-  });                   
-});
+<script> 
+    $(document).on("pagecreate",function(event){ 
+        $(window).on("orientationchange",function(){
+            if(window.orientation == 0) //profile
+            {
+               hidePage();
+            }
+            else //landscape
+            {
+                $("#rotate-img").hide();
+                document.getElementById("loader").style.display = "";
+                myVar = setTimeout(showPage, 2000);
+            }
+        });                   
+    });
 </script>
 
 </head>
-
-
-<body onload="loader()" style="margin:0;">
-    <!--<div id="logo-div">
-        <img id="logo" src="images/logo.png" />
-        <div>Plethora</div>
-    </div>-->
+<body onload="loader()" style="margin:0;background-color: #7799bb !important">
     <div id="loader" class="wrap red">
         <div class="shadow"></div>
         <div class="ball"></div>
-    </div>
-  
+    </div>  
     <div id="big-logo-div">
         <img id="big-logo" src="images/logo_shadow.png" />
         <div>Plethora</div>
     </div>
     <div id="play-div">
-        <img id="play-btn" src="images/play.png"/>
+        <img src="images/play.png"/>
         <p>בואו נשחק!</p>
     </div>
-
-
-    <!--<div id="test" style="width: 200px;height: 200px;border: 2px red solid" class="leftHighlight bottomHighlight upperShadow rightShadow StageAlpha"></div>-->
-
     <div id="levels-div">
         <div id="levels-container">
         </div>
