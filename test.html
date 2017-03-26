@@ -6,15 +6,11 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="scripts/home.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
-
 <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
  <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/levels.css">
     <link rel="stylesheet" type="text/css" href="css/plethora.css">
-
-   
-
     <link rel="shortcut icon" href="images/icon.ico">
     <meta charset="utf-8" />
     <title>Plethora - Home</title>
@@ -24,19 +20,12 @@
         $(window).on("orientationchange",function(){
             if(window.orientation == 0) //profile
             {
-                //alert("profile");
                hidePage();
-            //alert("(if) Orientation changed to: " + event.orientation);
             }
             else //landscape
             {
-                //alert("profile");
                 $("#rotate-img").hide();
-               // $("#loader").show();
-                //$("#big-logo-div").show();
-                //$("#play-div").show();
-
-document.getElementById("loader").style.display = "";
+                document.getElementById("loader").style.display = "";
                 myVar = setTimeout(showPage, 2000);
             }
         });                   
@@ -46,10 +35,6 @@ document.getElementById("loader").style.display = "";
 
 </head>
 <body onload="loader()" style="margin:0;background-color: #7799bb !important">
-    <!--<div id="logo-div">
-        <img id="logo" src="images/logo.png" />
-        <div>Plethora</div>
-    </div>-->
     <div id="loader" class="wrap red">
         <div class="shadow"></div>
         <div class="ball"></div>
@@ -63,10 +48,6 @@ document.getElementById("loader").style.display = "";
         <img src="images/play.png"/>
         <p>בואו נשחק!</p>
     </div>
-
-
-    <!--<div id="test" style="width: 200px;height: 200px;border: 2px red solid" class="leftHighlight bottomHighlight upperShadow rightShadow StageAlpha"></div>-->
-
     <div id="levels-div">
         <div id="levels-container">
         </div>
