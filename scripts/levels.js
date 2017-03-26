@@ -7,7 +7,7 @@ var config = {
 };
 
 $(function () {
-    OrientationChange();
+    //OrientationChange();
     drawLevels();
     showLevels();
 });
@@ -78,25 +78,7 @@ function showLevels()
     }, 1500);
 }
 
-function OrientationChange()
-{
-       $(document).on("pagecreate",function(event){ 
-        $(window).on("orientationchange",function(){
-            if(window.orientation == 0) //profile
-            {
-                $("#overlay").show();
-               //hidePage();
-            }
-            else //landscape
-            {
-                $("#overlay").hide();
-                // $("#rotate-img").hide();
-                // document.getElementById("loader").style.display = "";
-                // myVar = setTimeout(showPage, 2000);
-            }
-        });                   
-    });
-}
+
 
 
 
