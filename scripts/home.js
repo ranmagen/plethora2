@@ -27,6 +27,7 @@ function showPage() {
     $("#big-logo-div, #play-div").fadeIn( 1200 );
 
     if(navigator.userAgent.match(/Android/i)){
+        alert("in");
         setTimeout(window.scrollTo(0,10), 1500);
         
     }
