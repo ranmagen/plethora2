@@ -32,8 +32,8 @@ function showPage() {
    // $("#loader").fadeOut( "slow" );
     $("#big-logo-div, #play-div").fadeIn( 1200 );
 
-
-  document.body.requestFullscreen();
+//setTimeout(window.scrollTo(0,1),100);
+  //document.body.requestFullscreen();
     // if(navigator.userAgent.match(/Android/i)){
     //     window.scrollTo(0,1);
     // }

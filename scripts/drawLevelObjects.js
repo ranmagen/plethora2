@@ -11,7 +11,7 @@
 
             for (var j = slotsCnt; j >= 0; j--) {            
                 $('<div></div>').data('number', i + "_" + j).attr('id', 'slot' + i + '_' + j).addClass("slot").appendTo('#sentence' + i).droppable({
-                    accept: '#cards-container div',
+                    accept: '#cards-container div',                    
                     hoverClass: 'hovered',
                     drop: HandleCardDrop
                 });
@@ -23,20 +23,29 @@
         }
     }
 
+
     function DrawCards() {
         var cardsCnt = cards.length - 1;
         for (var i = cardsCnt; i >= 0; i--) {
             $('<div></div>').data('number', i).attr('id', 'card' + i).appendTo('#cards-container').addClass("card").draggable({
                 containment: '#sidebar',
-                stack: '#slots-container div',
+                stack: '#sidebar',//'#slots-container div',
                 cursor: 'move',
-                revert: true
+                revert: false
+                // start: function(event, ui) {            
+                // },
+                //stop: function(event, ui)
+               // {
+                   // alert('stop: dropped=' + ui.helper.data('dropped'));
+                    // Check value of ui.helper.data('dropped') and handle accordingly...
+                //}
             });
-
-                var cardId = "#card" + i;              
-                drowCardContent(cards[i], cardId);
+            var cardId = "#card" + i;              
+            drowCardContent(cards[i], cardId);
         }
     }
+
+
 
     function drowCardContent(card, appentTo)
     {        
@@ -72,6 +81,7 @@
     }
 
     function HandleCardDrop(event, ui) {
+        //alert("HandleCardDrop");
         var slotData = $(this).data('number');
         var cardNum = ui.draggable.data('number');
         var sentenceNum = slotData.split("_")[0];
@@ -81,13 +91,16 @@
         if (sentence.slots[slotNum].content == "question") {
             ui.draggable.position({ of: $(this), my: 'left top', at: 'left top' });
             ui.draggable.draggable('option', 'revert', false);
-        }
-
+        }  
+        // else
+        // {
+        //     alert("out");
+        // }
         sentence.slots[slotNum].card = cardNum;
         CheckIfSentenceCompleted(sentence);
     }
 
-        function BlinkCloseLightColor()
+    function BlinkCloseLightColor()
     {
          $("#open-light").css({ fill: "#7799bb" });
     }

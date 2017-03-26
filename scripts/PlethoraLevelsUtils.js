@@ -157,7 +157,6 @@ $(function () {
                     continue;
                 }
 
-
                 ctx.fillStyle = GetColor(shapes[i].color);
                 ctx.beginPath();
                 switch (shapes[i].type) {
@@ -228,8 +227,7 @@ $(function () {
                 {
                     shapes[i].x += shapes[i].vx;
                     shapes[i].y += shapes[i].vy;
-                }
-            
+                }            
             }          
         pause = requestAnimationFrame(draw);
     }
