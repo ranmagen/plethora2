@@ -25,6 +25,10 @@ function showPage() {
     document.getElementById("loader").style.display = "none";
    // $("#loader").fadeOut( "slow" );
     $("#big-logo-div, #play-div").fadeIn( 1200 );
+
+    if(navigator.userAgent.match(/Android/i)){
+        window.scrollTo(0,1);
+    }
 }
 
 
