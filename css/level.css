@@ -238,7 +238,7 @@
 /****** Cards *****/
 #slots-container {
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
