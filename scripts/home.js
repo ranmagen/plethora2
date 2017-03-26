@@ -1,9 +1,15 @@
 
 $(function () {
-
     $("#play-div").click(function(){
         window.location.href = "levels.html?level=" + 0;
     });
+
+    // $('#play-btn').on({
+    //     'click': function(){
+    //         alert("in");
+    //         $('#play-btn').attr('src','images/play2.png');
+    //     }
+    // });
 });
 
 
@@ -26,11 +32,11 @@ function showPage() {
    // $("#loader").fadeOut( "slow" );
     $("#big-logo-div, #play-div").fadeIn( 1200 );
 
-    if(navigator.userAgent.match(/Android/i)){
-        alert("in");
-        setTimeout(window.scrollTo(0,10), 1500);
-        
-    }
+
+  document.body.requestFullscreen();
+    // if(navigator.userAgent.match(/Android/i)){
+    //     window.scrollTo(0,1);
+    // }
 }
 
 
