@@ -2,8 +2,8 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <!--<script src="scripts/jquery-3.1.1.min.js"></script>-->
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
     <script src="scripts/home.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
 <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
@@ -37,24 +37,24 @@
 // window.addEventListener("load", function(){ if(!window.pageYOffset){ hideAddressBar(); } } );
 // window.addEventListener("orientationchange", hideAddressBar );
 
-    $(document).on("pagecreate",function(event){ 
-        $(window).on("orientationchange",function(){
-            if(window.orientation == 0) //profile
-            {
-               hidePage();
-            }
-            else //landscape
-            {
-                $("#rotate-img").hide();
-                document.getElementById("loader").style.display = "";
-                myVar = setTimeout(showPage, 2000);
-            }
-        });                   
-    });
+    // $(document).on("pagecreate",function(event){ 
+    //     $(window).on("orientationchange",function(){
+    //         if(window.orientation == 0) //profile
+    //         {
+    //            hidePage();
+    //         }
+    //         else //landscape
+    //         {
+    //             $("#rotate-img").hide();
+    //             document.getElementById("loader").style.display = "";
+    //             myVar = setTimeout(showPage, 2000);
+    //         }
+    //     });                   
+    // });
 
-//      if(navigator.userAgent.match(/Android/i)){
-//     window.scrollTo(0,1);
-//  }
+     if(navigator.userAgent.match(/Android/i)){
+    window.scrollTo(0,1);
+ }
 // function hideAddressBar(){
 //   if(document.documentElement.scrollHeight<window.outerHeight/window.devicePixelRatio)
 //     document.documentElement.style.height=(window.outerHeight/window.devicePixelRatio)+'px';
