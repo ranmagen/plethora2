@@ -606,9 +606,7 @@ $(function () {
     });
 
     $("#reload-btn").click(function () {
-        ClearLevel();
-        shapes = [];
-        LevelSetup();
+         location.reload();
     });
 
     function IsSidebarOpen() {
