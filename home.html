@@ -35,7 +35,9 @@ $(document).on("pagecreate",function(event){
 </script>
 
 </head>
-<body onload="loader()" style="margin:0;">
+
+<body onload="setTimeout(function(){window.scrollTo(0,document.body.scrollHeight)}, 1000);loader()" style="margin:0;">
+<!--<body onload="loader()" style="margin:0;">-->
     <!--<div id="logo-div">
         <img id="logo" src="images/logo.png" />
         <div>Plethora</div>
