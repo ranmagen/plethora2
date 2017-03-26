@@ -10,11 +10,7 @@ $(function () {
 var myVar;
 
 function loader() {
-   // hidePage();
-//myVar = setTimeout(showPage, 2000);
-checkMobileOrientation();
-    
-    
+    checkMobileOrientation();    
 }
 
 function hidePage()
@@ -35,16 +31,12 @@ function showPage() {
 function checkMobileOrientation()
 {    
     if(window.innerHeight > window.innerWidth){
-      // alert("profile - on load");
        hidePage();
-        //alert("Please use Landscape!");
     }
     else
     {
         myVar = setTimeout(showPage, 2000);
     }
-
-
 }
 
 

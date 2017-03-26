@@ -105,6 +105,7 @@ $(function () {
         this.type = slot.type;
         this.content = slot.content;
         this.content_h = slot.content_h;
+        this.tooltip = slot.tooltip;
         this.card;
     }
 

@@ -1,4 +1,6 @@
-﻿     function DrawSentences() {
+﻿     
+     
+     function DrawSentences() {
         var sentencesCnt = sentences.length;
 
         for (var i = 0; i < sentences.length; i++) {
@@ -58,10 +60,15 @@
                         }
                         else //icon for method or param
                         {
-                            $("<img src='images/rules/" + card.content + ".png'></img>").appendTo(appentTo);
+                            $("<img src='images/rules/" + card.content + ".png' ></img>").appendTo(appentTo);
                             $(appentTo).addClass(card.type);
-                        }                                          
-                }
+                        }                     
+                    }
+                    if(card.tooltip != undefined)
+                    {
+                        $(appentTo).addClass("tooltip");
+                        $(" <span class='tooltiptext'>"+ card.tooltip +"</span>").appendTo(appentTo);
+                    }   
     }
 
     function HandleCardDrop(event, ui) {
