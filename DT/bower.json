@@ -1,0 +1,32 @@
+{
+  "name": "css-circle-menu",
+  "version": "2.0.0",
+  "homepage": "https://github.com/callmenick/CSS-Circle-Menu",
+  "authors": [
+    "Nick Salloum <nick@callmenick.com>"
+  ],
+  "description": "Circular fly-out navigation menu with CSS",
+  "main": "gulpfile.js",
+  "ignore": [
+    "*",
+    "!css/circle-menu.css",
+    "!css/circle-menu.min.css",
+    "!gulpfile.js",
+    "!js/src/circleMenu.js",
+    "!js/dist/circleMenu.min.js",
+    "!sass/circle-menu.scss",
+    "!sass/_circle-menu-helpers.scss"
+  ],
+  "keywords": [
+    "CSS",
+    "CSS3",
+    "menu",
+    "flyout",
+    "menu",
+    "circular",
+    "menu",
+    "transitions",
+    "transforms"
+  ],
+  "license": "MIT"
+}
