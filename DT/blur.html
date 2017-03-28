@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/common.min.css">
   <link rel="stylesheet" href="css/circle-menu.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="icon" type="image/png" href="http://callmenick.com/favicon.png">
   <style>
   body,  .c-circle-menu__mask
@@ -15,12 +16,12 @@
     background-color:white !important;
   }
 
-.text-shadow { color:transparent; text-shadow:0 0 3px #000; }
+.text-shadow { color:transparent; text-shadow:0 0 5px #000; }
 
 .text-shadow:hover { color:transparent; text-shadow:0 0 0px #000; }
+.text-unshadow { color:transparent; text-shadow:0 0 0px #000; }
 
   </style>
-
 </head>
 <body>
 
@@ -46,8 +47,8 @@
       </a>
     </li>
     <li class="c-circle-menu__item">
-      <a href="color.html" class="c-circle-menu__link">
-        <img src="img/search.svg" alt="">
+          <a href="mirror.html" class="c-circle-menu__link">
+        <img src="img/mirror.png" alt="">
       </a>
     </li>
     <li class="c-circle-menu__item">
@@ -70,29 +71,7 @@
     <h4 class="text-shadow">Nothing is known for certain about Medicine in prehistoric times. Historians&#39;
 statements about prehistoric medicine are usually based on ancient
 archaeological discoveries.</h4>
-    <div class="text-shadow">
-        The defining characteristic of prehistoric societies is that the people of these societies could
-    not write. They could not therefore pass on medical knowledge beyond what could be
-    remembered. However, many of the primitive people that survived in the modern age
-    seemed to have built up a system of skills and behaviours that kept them healthy in their
-    environment, despite not having anything written down. They have done this through a
-    process of trial and error and natural selection, and it seems likely that the people of
-    prehistoric times were similar.
-    </div><br/>
-     <div class="text-shadow">
- Most prehistoric peoples were nomadic - so they did not settle down and build things like
-hospitals, neither did they have enough consistency in their own lives to observe how all
-human bodies work the same. Anthropologists have found primitive tribes who have not yet
-realised that the act of sex leads to childbirth.
-    </div><br/>
-     <div class="text-shadow">
-    The primitive technology of prehistoric people put them at the mercy of the elements, and
-led to a system of beliefs that saw humankind as being at the mercy of unpredictable spirits.
-These were said to bring life, death, health and disease. Such ideas led to a world in which
-spiritual rituals and the shaman, or witch-doctor, dominated medicine.
-    </div>
-   
-  </div>
+  <div class="text-div"></div>
 </main>
 
 <footer class="demo-footer">
@@ -107,6 +86,48 @@ spiritual rituals and the shaman, or witch-doctor, dominated medicine.
   var el = '.js-menu';
   var myMenu = cssCircleMenu(el);
 </script>
+
+  <script>
+
+     var str = 'The defining characteristic of prehistoric societies is that the people of these societies could ' +
+'not write. They could not therefore pass on medical knowledge beyond what could be ' +
+   'remembered. However, many of the primitive people that survived in the modern age ' +
+    'seemed to have built up a system of skills and behaviours that kept them healthy in their ' +
+    'environment, despite not having anything written down. They have done this through a ' +
+    'process of trial and error and natural selection, and it seems likely that the people of ' +
+    'prehistoric times were similar. ' +
+ 'Most prehistoric peoples were nomadic - so they did not settle down and build things like ' +
+'hospitals, neither did they have enough consistency in their own lives to observe how all ' +
+'human bodies work the same. Anthropologists have found primitive tribes who have not yet ' +
+'realised that the act of sex leads to childbirth. ' +
+    'The primitive technology of prehistoric people put them at the mercy of the elements, and ' +
+'led to a system of beliefs that saw humankind as being at the mercy of unpredictable spirits. ' +
+'These were said to bring life, death, health and disease. Such ideas led to a world in which ' +
+'spiritual rituals and the shaman, or witch-doctor, dominated medicine.';
+
+var spans = '<span>' + str.split(' ').join('</span><span> ') + '</span>';
+
+$(spans).appendTo('.text-div').each(function (i) {
+   $(this).addClass("span_" + i).addClass("text-shadow");
+});
+
+$('span[class^="span_"]').hover(function(){
+  $(".text-unshadow").removeClass("text-unshadow");
+    $(this).addClass("text-unshadow");
+});
+
+
+//$(spans).appendTo('.text-div');
+//$(spans).hide().appendTo('.text-div').each(function (i) {
+ 
+//     $(this).delay(100 * i).css({
+//         display: 'inline',
+//         opacity: 0
+//     }).animate({
+//         opacity: 1
+//     }, 100);
+// });
+  </script>
 
 <!-- EXTERNAL SCRIPTS FOR CALLMENICK.COM, PLEASE DO NOT INCLUDE -->
 <!--<script src="js/lib/githubIcons.js"></script>
