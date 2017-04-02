@@ -73,11 +73,64 @@
                             $(appentTo).addClass(card.type);
                         }                     
                     }
-                    if(card.tooltip != undefined)
+                    var tooltip = "";
+                    if(card.content == "question")
                     {
-                        $(appentTo).addClass("tooltip");
-                        $(" <span class='tooltiptext'>"+ card.tooltip +"</span>").appendTo(appentTo);
-                    }   
+                        tooltip = "*גרור לכאן*";
+                    }
+                    else
+                    {
+                        switch(card.type)
+                        {
+                            case "method":
+                            {
+                                switch(card.content)
+                                {
+                                    case "hit":
+                                        tooltip  = "מתנגש";
+                                        break;
+                                    case "created":
+                                        tooltip  = "נוצר";
+                                        break;
+                                    case "deleted":
+                                        tooltip  = "נעלם";
+                                        break;
+                                }        
+                                break;
+                            }
+                            case "wall":
+                            {
+                                switch(card.content)
+                                {
+                                    case "any_wall":
+                                        tooltip = "במסגרת";
+                                        break;
+                                }
+                            }
+                            case "shape":
+                            {
+                                switch(card.content.type)
+                                {
+                                    case "circle":
+                                        tooltip = "עיגול";
+                                        break;
+                                    case "square":
+                                        tooltip = "ריבוע";
+                                        break;
+                                    case "triangle":
+                                        tooltip = "משולש";
+                                        break;
+                                }
+                            }
+                        }
+                    }
+               
+                  if(tooltip != "")
+                  {
+                      $(appentTo).addClass("tooltip");
+                      $(" <span class='tooltiptext'>"+ tooltip +"</span>").appendTo(appentTo);
+                  }
+                    
     }
 
     function HandleCardDrop(event, ui) {
