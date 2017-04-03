@@ -396,7 +396,7 @@ div.slot p {
     padding-bottom:5px;
     padding-right: 30px;
     padding-left: 30px;
-    font-size: 43px;
+    font-size: 38px;
     cursor: pointer;
     box-shadow: -3px 3px 0px 1px #c43e03;    
 }
@@ -486,6 +486,36 @@ body {
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+}
+
+
+
+.ui-widget-overlay.custom-overlay
+{
+    background-color: black;
+    background-image: none;
+    opacity: 0.9;
+    z-index: 1040;    
+}
+.ui-widget-content, .ui-widget-header
+{
+    background-color: transparent !important;
+}
+.ui-widget.ui-widget-content, .ui-widget-header
+{
+    border:none !important;
+}
+.ui-dialog
+{
+    width:450px !important;
+}
+.ui-dialog-buttonset, .ui-dialog-titlebar, .ui-dialog-buttonpane
+{
+    display: none !important;
+}
+#dialog
+{
+    cursor: pointer;
 }
 
 
