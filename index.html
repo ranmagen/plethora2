@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-       <meta name="theme-color" content="#606060" /> 
-    <!--<script src="scripts/jquery-3.1.1.min.js"></script>-->
+    <meta name="theme-color" content="#606060" /> 
+    <script src="scripts/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Varela+Round:300,400,600,700&amp;lang=he" />
-     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+     <!--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
     <script src="scripts/jquery-ui.min.js"></script>
     <script src="scripts/jquery.ui.touch-punch.min.js"></script>
     <script src="scripts/PlethoraScript.js"></script>    
@@ -22,15 +22,41 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
     <title>Plethora</title>
     <meta charset="utf-8" />
+
+<style>
+
+
+</style>
+  <script>
+  $( function() {
+
+    // $("#itroduction").click(function(){
+    //      $( "#dialog" ).dialog( "close" );
+    // });
+
+
+    // $( "#dialog" ).dialog({
+    //   modal: true,
+    //     open: function() {
+    //     $('.ui-widget-overlay').addClass('custom-overlay');
+    // }
+
+    // });
+  } );
+  </script>
+
+
 </head>
 <body>
+
+<div id="dialog" >
+  <img id="itroduction" src="images/itroductionGif.gif" style="width:400px;margin-top:20px;display: none"/>
+</div>
     <!--<input id="home-btn" type="image" src="images/logo.png" />-->
     <div id="logo-div">
         <img id="logo" src="images/logo.png" />
         <!--<div>Plethora</div>-->
     </div>
-
-
     <input id="reload-btn" type="image" src="images/reload.png" />
     <div id="header">
         <div id="level_num" class="level-title"></div>
@@ -54,6 +80,9 @@
             </div>
         </div>
         <div id="win_condition">
+
+<!--<img src="images/itroductionGif.gif" style="width:240px;margin-top:20px"/>-->
+
             <p id="win_condition_text"></p>
             <div id="ok_win_btn" class="plethora-btn centered">אוקיי</div>
             <div id="win_condition_btn">
