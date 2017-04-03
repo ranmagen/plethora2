@@ -170,3 +170,8 @@
         BlinkCloseLightColor();
         return true;
     }
+
+    // function AddInstructionGif()
+    // {
+    //     $('<img></img>').attr('src', 'images/itroductionGif.gif').appendTo('#win_condition');
+    // }

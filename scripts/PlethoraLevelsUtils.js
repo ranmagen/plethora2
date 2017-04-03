@@ -252,8 +252,30 @@ $(function () {
             shapes.push(new Shape(i, level.shapes[i].type, level.shapes[i].color, size, cx, cy, speed, speed));
         }
 
-       // $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
-       SetShapesCurrentState();
+        SetShapesCurrentState();
+
+        if(levelNum == 0)
+        {
+            $("#itroduction").show();
+            //itroduction
+                $("#itroduction").click(function(){
+                    $( "#dialog" ).dialog( "close" );
+                });
+
+                $( "#dialog" ).dialog({
+                    modal: true,
+                        open: function() {
+                        $('.ui-widget-overlay').addClass('custom-overlay');
+                    }
+                });
+            
+        }
+        else
+        {
+            //$("#itroduction").hide();
+        }
+  
+   
 
         //draw senteces
         InitSentences(level.sentences);
@@ -677,7 +699,6 @@ function unBlurPage()
         }, 750);
     });
 
-
     $("#next_lvl_btn").click(function(){
             levelNum++;
             window.location.href = "levels.html?level=" + levelNum;
@@ -687,45 +708,33 @@ function unBlurPage()
         window.location.href = "levels.html?level=" + levelNum;
     });
 
-    // function FixShapesAnimation()
-    // {
-  
-    //     for(var j=0 ; j<shapes.length ; j++){
-    //         for(var i=j+1 ; i<shapes.length ; i++){
-    //             if(shapes[j].id == shapes[i].id){
-    //                 continue;
-    //             }
-                
-    //             if(GetDistance(shapes[i].x, shapes[i].y, shapes[j].x, shapes[j].y) < shapes[i].r+ shapes[j].r)
-    //             {
-    //                 if(shapes[i].x > shapes[j].x)
-    //                 {
-    //                     shapes[i].x += shapes[i].x - shapes[j].x + gap;                    
-    //                 }
-    //                 // else if(shapes[i].x < shapes[j].x)
-    //                 {
-    //                     shapes[i].x -= shapes[j].x - shapes[i].x + gap;                    
-    //                 }
-
-    //                    if(shapes[i].y > shapes[j].y)
-    //                 {
-    //                     shapes[i].y += shapes[i].y - shapes[j].y + gap;                    
-    //                 }
-    //                 else if(shapes[i].y < shapes[j].y)
-    //                 {
-    //                     shapes[i].y -= shapes[j].y - shapes[i].y + gap;                    
-    //                 }
-                    
-    //             }
-    //         }
-    //     }
-        
-    // }
-
-      function getRandom(min, max) {
+     function getRandom(min, max) {
        // return min + Math.floor(Math.random() * (max - min + 1));
         return min + Math.random() * (max - min + 1);
     }
+
+    function CalcNewSpeed()
+    {
+        var shapesCnt = shapes.length;
+        if(shapesCnt == 1)
+        {
+
+        }
+        else if(shapesCnt >= 2 && shapesCnt <= 10)
+        {
+
+        }
+        else if(shapesCnt >= 11 && shapesCnt <= 30)
+        {
+
+        }
+        for(i in shapes){
+            shapes[i].vx = shapes[i].vy = newSpeed;
+            speed = newSpeed;
+        }
+    }
+
+
 });
 
 
