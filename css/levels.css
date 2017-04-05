@@ -84,6 +84,12 @@
     width: 250px;
 }
 
+#plethora-name
+{
+    width: 246px;
+    margin-left:4px;
+}
+
 .wrap {
     /*bottom: 340px;*/
     bottom: 50%;
