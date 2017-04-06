@@ -207,16 +207,14 @@ body {
     }
 }
 
-
-
 #logo-div {
     /*position: absolute;
     right: 90%;
     top: 7%;
     transform: translate(-50%, -50%);*/
-float: left;
-margin-left:4%;
-padding-top:1%;
+    float: left;
+    margin-left:40px;
+    padding-top:1%;
 }
 
 #logo {
