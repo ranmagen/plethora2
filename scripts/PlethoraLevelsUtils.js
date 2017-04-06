@@ -30,10 +30,102 @@ $(function () {
     ctx.canvas.width = $("#sidebar").offset().left;
     ctx.canvas.height = window.innerHeight - $("#header").height();
     ctx.fillStyle = '#00031a';
+
     var limitShapes;
     var container = { x: 60, y: 10, width: ctx.canvas.width - 130, height: ctx.canvas.height - 60 };
 
     ctx.fillRect(container.x, container.y, container.width, container.height);
+
+  //  ctx.strokeRect(container.x, container.y, container.width, container.height);
+
+
+ /***********************************************************/
+ /*                       Create Border                     */
+ /***********************************************************/
+var borderColorsTop = ['color9', 'color8', 'color7', 'color6', 'color5', 'color4', 'color11', 'color10', 'color9','color8', 'color7', 'color6', 'color5', 'color4'];
+var borderLengthTop = [0.11, 0.06, 0.03, 0.11, 0.06, 0.06, 0.11, 0.03,  0.11, 0.06, 0.03, 0.11, 0.06, 0.06 ];
+
+var borderColorsRight = ['color4', 'color5', 'color6', 'color7', 'color8', 'color9', 'color10'];
+var borderLengthRight = [0.2, 0.1, 0.06, 0.22, 0.1, 0.12, 0.2];
+
+var borderColorsBottom = ['color9', 'color8', 'color7', 'color6', 'color5', 'color4', 'color11', 'color10', 'color9', 'color8', 'color7', 'color6', 'color5', 'color4'];
+var borderLengthBottom = [0.06, 0.06, 0.11, 0.03, 0.06, 0.11, 0.03, 0.11, 0.06, 0.06, 0.11, 0.03, 0.06, 0.11 ];
+
+var borderColorsLeft = ['color4', 'color5', 'color6', 'color7', 'color8', 'color9', 'color10'];
+var borderLengthLeft = [0.2, 0.1, 0.1, 0.22, 0.06, 0.12, 0.2];
+
+var xpos = container.x;
+//Top Border
+for(b in borderColorsTop)
+{
+    bLength = container.width * borderLengthTop[b];
+    ctx.beginPath();
+    ctx.moveTo(xpos, container.y);
+    if(b == borderColorsTop.length-2)
+    {
+        bLength += 10;
+    }
+    ctx.lineTo(xpos + bLength, container.y);
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = GetColor(borderColorsTop[b]);
+    ctx.stroke();
+    xpos = xpos + bLength;
+}
+xpos -= 10;
+var ypos = container.y;
+
+//Right Border
+for(b in borderColorsRight)
+{
+    bLength = container.height * borderLengthRight[b];
+    ctx.beginPath();
+    ctx.moveTo(xpos, ypos);
+    if(b == borderColorsRight.length-2)
+    {
+        bLength += 10;
+    }
+    ctx.lineTo(xpos, ypos + bLength);
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = GetColor(borderColorsRight[b]);
+    ctx.stroke();
+    ypos = ypos + bLength;
+}
+ypos -= 10;
+
+//Bottom Border
+for(b in borderColorsBottom)
+{
+    bLength = container.width * borderLengthBottom[b];
+    ctx.beginPath();
+    ctx.moveTo(xpos, ypos);
+    if(b == borderColorsBottom.length-2)
+    {
+        bLength += 10;
+    }
+    ctx.lineTo(xpos - bLength, ypos);
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = GetColor(borderColorsBottom[b]);
+    ctx.stroke();
+    xpos = xpos - bLength;
+}
+xpos += 10;
+//Left Border
+for(b in borderColorsLeft)
+{
+    bLength = container.height * borderLengthLeft[b];
+    ctx.beginPath();
+    ctx.moveTo(xpos, ypos);
+    if(b == borderColorsLeft.length-2)
+    {
+        bLength += 10;
+    }
+    ctx.lineTo(xpos, ypos - bLength);
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = GetColor(borderColorsLeft[b]);
+    ctx.stroke();
+    ypos = ypos - bLength;
+}
+
     firebase.initializeApp(config);
 
  /***********************************************************/
@@ -267,16 +359,13 @@ $(function () {
                         open: function() {
                         $('.ui-widget-overlay').addClass('custom-overlay');
                     }
-                });
-            
+                });            
         }
         else
         {
             //$("#itroduction").hide();
         }
   
-   
-
         //draw senteces
         InitSentences(level.sentences);
         DrawSentences();
@@ -443,6 +532,34 @@ $(function () {
             case "color6":
                 {
                     return "#ffbb00";
+                }
+            case "color7":
+                {
+                    return "#ccbb33";
+                }
+            case "color8":
+                {
+                    return "#bbbb99";
+                }
+            case "color9":
+                {
+                    return "#77ccaa";
+                }
+             case "color10":
+                {
+                    return "#bbccdd";
+                }
+              case "color11":
+                {
+                    return "#7799bb";
+                }
+             case "color12":
+                {
+                    return "#845478";
+                }
+            case "color13":
+                {
+                    return "#f1a2b9";
                 }
         }
     }
