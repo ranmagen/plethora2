@@ -718,6 +718,10 @@ for(b in borderColorsLeft)
                     cancelAnimationFrame(pause);
                     clearInterval(blinkOpenSidebarLight);
                     blurPage();
+
+                    setTimeout(function() {
+                        $(".card").effect( "shake", {times: 1}, 200 );
+                    }, 300);
                 }
                 else //close sidebar
                 {
