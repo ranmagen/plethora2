@@ -386,7 +386,8 @@ div.slot p {
 {
     position: absolute;
     top:94%;
-    left: 60px;
+    left: 50px;
+    margin-top:5px;
 }
 
 .plethora-btn
