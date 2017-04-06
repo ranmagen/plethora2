@@ -76,7 +76,7 @@
                     var tooltip = "";
                     if(card.content == "question")
                     {
-                        tooltip = "*גרור לכאן*";
+                        tooltip = "*גררו לכאן*";
                     }
                     else
                     {
