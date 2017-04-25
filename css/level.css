@@ -40,7 +40,7 @@
     background: #434344; /*#7e96c4;*/
     z-index: 10000;
     margin-left: 0px !important;
-    left: 96.1% !important;
+    left: 96.1% !important;    
     box-shadow: 2px 4px 0px 4px #333232;
     opacity: 0.9;
 }
@@ -127,6 +127,12 @@
     #open-btn {
         left: 94.6% !important;
     }
+}
+
+@media only screen 
+and (min-device-width : 1920px) 
+and (max-device-width : 1920px) {
+   left: 97.3% !important;
 }
 
 /*.shadow {
