@@ -130,12 +130,16 @@
 }
 
 @media only screen and (min-width : 1824px) {
-        .show-from-right {
+    .show-from-right {
         transform: translate3d(-1855px, 0, 0);
     }
      #open-btn {
             left: 97.3% !important;
-     }
+    }
+    #win_condition_btn, #move_to_next_lvl_btn
+    {
+        font-size: 50px;
+    }
 }
 
 /*.shadow {
