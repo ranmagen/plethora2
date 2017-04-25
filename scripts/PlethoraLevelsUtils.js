@@ -28,7 +28,10 @@ $(function () {
     var ctx = canvas.getContext('2d');
     var checkSuccess = true;
     ctx.canvas.width = $("#sidebar").offset().left;
-    ctx.canvas.height = window.innerHeight - $("#header").height();
+
+var winHight = window.innerHeight >= 950 ? 850 : window.innerHeight;
+ ctx.canvas.height = winHight - $("#header").height();
+    //ctx.canvas.height = window.innerHeight - $("#header").height();
     ctx.fillStyle = '#00031a';
 
     var limitShapes;
