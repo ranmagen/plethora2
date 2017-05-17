@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="theme-color" content="#606060" /> 
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Varela+Round:300,400,600,700&amp;lang=he" />
+     <!--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.ui.touch-punch.min.js"></script>
+    <script src="scripts/PlethoraScript.js"></script>    
+    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+    <script src="scripts/drawLevelObjects.js"></script>
+    <script src="scripts/winAnimation.js"></script>
+     <!--<script src="scripts/playgobridge.js"></script>-->
+    <script type="text/javascript" src="scripts/elastic-collision-bruteforce-strategy.js"></script>
+    <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="scripts/rotateMobile.js"></script>
+    <script src="scripts/PlethoraLevelsUtils.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/plethora.css">
+    <link rel="stylesheet" type="text/css" href="css/level.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <link rel="shortcut icon" href="images/icon.ico">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <title>Plethora</title>
+    <meta charset="utf-8" />
+
+<style>
+
+
+</style>
+
+
+
+</head>
+<body>
+
+<div id="dialog" >
+  <img id="itroduction" src="images/itroductionGif.gif" style="width:400px;margin-top:20px;display: none"/>
+</div>
+    <!--<input id="home-btn" type="image" src="images/logo.png" />-->
+    <div id="logo-div">
+        <img id="logo" src="images/logo.png" />
+        <!--<div>Plethora</div>-->
+    </div>
+    <input id="reload-btn" type="image" src="images/reload.png" />
+    <div id="header">
+        <div id="level_num" class="level-title"></div>
+        <div id="level_name" class="level-title"></div>
+    </div>
+    <div class="containerDiv">
+        <div id="stageDiv">
+
+            <canvas></canvas>
+        </div>
+        <div id='limit-shapes'></div>
+        <div id="open-btn" class="right-sidebar-outer" >
+            <svg  height="100" width="40">
+                <circle id="open-light" cx="10" cy="50" r="10"  fill="#898989" />
+            </svg>
+        </div>   
+        <div id="sidebar" class="right-sidebar-outer shadow">
+            <div id="task"></div>
+            <div id="slots-container">
+            </div>
+            <div id="cards-container">
+            </div>
+        </div>
+        <div id="win_condition">
+
+<!--<img src="images/itroductionGif.gif" style="width:240px;margin-top:20px"/>-->
+
+            <p id="win_condition_text"></p>
+            <div id="ok_win_btn" class="plethora-btn centered">אוקיי</div>
+            <div id="win_condition_btn">
+                  <svg  height="100" width="100">
+                    <circle id="close_win_condition" cx="50" cy="30" r="10"  fill="#898989" />
+                 </svg>
+            </div>
+        </div>
+        <div id="move_to_next_lvl">
+            <p id="move_to_next_lvl_text">כל הכבוד!</p> 
+            <div id="next_lvl_btn" class="plethora-btn centered">לשלב הבא</div>           
+            <div id="move_to_next_lvl_btn">
+                  <svg  height="100" width="100">
+                    <circle id="close_move_to_next_lvl" cx="50" cy="30" r="10"  fill="#898989" />
+                 </svg>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" style="display: none">
+         <img src="images/rotate.png" class="centered" />
+    </div>
+
+<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter44555057 = new Ya.Metrika({ id:44555057, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <!-- /Yandex.Metrika counter -->
+
+<!--<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-96833613-1', 'auto');
+  ga('send', 'pageview');
+</script>-->
+
+</body>
+</html>
