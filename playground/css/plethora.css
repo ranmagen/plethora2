@@ -1,0 +1,240 @@
+/* hebrew */
+/*@font-face {
+    font-family: 'Alef';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Alef Regular'), local('Alef-Regular'), url(https://fonts.gstatic.com/s/alef/v6/YSq5FGaxu3aLqDeLnbayWg.woff2) format('woff2');
+    unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
+}*/
+/* latin */
+/*@font-face {
+    font-family: 'Alef';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Alef Regular'), local('Alef-Regular'), url(https://fonts.gstatic.com/s/alef/v6/PgKMCGPCV9cpBC0J2OLAhg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}*/
+
+/* hebrew */
+@font-face {
+  font-family: 'Varela Round';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(http://fonts.gstatic.com/s/varelaround/v8/APH4jr0uSos5wiut5cpjrkByb1TKJa77egybnpn19yM.woff2) format('woff2');
+  unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* vietnamese */
+/*@font-face {
+  font-family: 'Varela Round';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(http://fonts.gstatic.com/s/varelaround/v8/APH4jr0uSos5wiut5cpjrv8zf_FOSsgRmwsS7Aa9k2w.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}*/
+/* latin-ext */
+/*@font-face {
+  font-family: 'Varela Round';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(http://fonts.gstatic.com/s/varelaround/v8/APH4jr0uSos5wiut5cpjrj0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}*/
+/* latin */
+/*@font-face {
+  font-family: 'Varela Round';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(http://fonts.gstatic.com/s/varelaround/v8/APH4jr0uSos5wiut5cpjrugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}*/
+
+
+
+body, html {
+    direction: rtl;
+    font-family: 'Varela Round' !important;
+    color: white;
+    /*width: 100%;
+    height: 100%;
+    margin: 0px;*/
+}
+
+body {
+    background-color: green;
+    overflow: hidden;
+}
+
+
+
+#home-btn {
+    /*float: left;*/
+    width: 40px;
+    cursor: pointer;
+    /*left: 1%;
+    position: absolute;*/
+    float:left;
+    margin-top: 10px;
+}
+
+
+
+#reload-btn {
+    width: 40px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+
+/***** colors *****/
+.color1 {
+    background: #51af87;
+}
+
+.color2 {
+    background: #c2c2c2;
+}
+
+.color3 {
+    background: #737373;
+}
+
+.color4 {
+    /*background: #aa6666;*/
+      background: #845478;
+}
+
+.color5 {
+    background: #dd4400;
+}
+
+.color6 {
+    background: #ffbb00;
+}
+
+.color7 {
+    background: #ccbb33;
+}
+
+.color8 {
+    background: #bbbb99;
+}
+
+.color9 {
+    background: #77ccaa;
+}
+
+.color10 {
+    background: #bbccdd;
+}
+
+.color11 {
+    background: #7799bb;
+}
+
+.color12 {
+    background: #845478;
+}
+
+.color13 {
+    background: #f1a2b9;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/***** positions *****/
+.pos83 /*rignt-center*/ {
+    top: 45%;
+    margin-right: 6%;
+}
+
+/***** sizes *****/
+.small {
+    width: 30px;
+    height: 30px;
+}
+
+.medium {
+    width: 60px;
+    height: 60px;
+}
+
+.large {
+    width: 100px;
+    height: 100px;
+}
+
+
+
+#tst {
+    animation: rotate 4s 0s infinite; /*rotate 2s cubic-bezier(.71,.13,.36,.89) 0s infinite;*/
+    -webkit-animation: rotate 4s 0s infinite; /*rotate 2s cubic-bezier(.71,.13,.36,.89) 0s infinite;*/
+    display: inline-block;
+    position: absolute;
+}
+
+    #tst:after {
+        left: 100px;
+    }
+
+    #tst:after {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: #fff;
+        content: "";
+    }
+
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+#logo-div {
+    /*position: absolute;
+    right: 90%;
+    top: 7%;
+    transform: translate(-50%, -50%);*/
+    float: left;
+    margin-left:40px;
+    padding-top:1%;
+}
+
+#logo {
+    width: 55px;
+}
+
+#overlay
+{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #7799bb;    
+    z-index: 10001;
+}
+
+
+
