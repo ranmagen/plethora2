@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Slider - Custom handle</title>
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+  
+  <style>
+  #custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+  }
+  #custom-handle2 {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+  }
+  #custom-handle3 {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+  }
+
+  </style>
+ <!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  	  	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/jquery-ui.js"></script>
+  <script src="js/Pizzicato.js"></script>
+  <script>
+  var delay = new Pizzicato.Effects.Delay();
+  var sound = new Pizzicato.Sound(
+    { 
+      source: 'file',
+      options: { path: ["./sounds/299.mp3"] 
+    }
+  }, function() {
+    console.log('sound file loaded!');
+    sound.volume = 0;
+    sound.play();
+    
+  });
+
+  var sound2 = new Pizzicato.Sound(
+    { 
+      source: 'file',
+      options: { path: ["./sounds/sehel.mp3"] 
+    }
+  }, function() {
+    console.log('second sound file loaded!');
+    sound2.volume = 0;
+    sound2.play();
+    sound2.pause();
+  });
+  
+  function applyOnSound(value, value2, value3) {
+    if (value!==null) { 
+      sound.volume=value/100;
+    }
+    if (value2!==null) {
+      sound.removeEffect(delay);
+      delay.feedback = value2/100;
+      delay.time = 0.1;
+      delay.mix = 0.1; 
+      sound.addEffect(delay);
+    }
+    if (value3!==null) { 
+      if(value3){
+        sound2.play();
+        sound2.volume=value3/100;
+      }
+      else{
+        sound2.stop();
+      }
+
+    }
+    console.log(value + ' ' + value2);
+    sound.play(); 
+  }
+
+  $( function() {
+    var handle = $( "#custom-handle" );
+    $( "#slider" ).slider({
+      min:0,
+      max:100,
+      create: function() {
+        handle.text( $( this ).slider( "value" ) );
+        //sound.play();
+      },
+      slide: function( event, ui ) {
+        handle.text( ui.value );
+        applyOnSound(ui.value, null, null);
+      }
+    });
+  } );
+
+  $( function() {
+    var handle = $( "#custom-handle2" );
+    $( "#slider2" ).slider({
+      min:0,
+      max:100,
+      create: function() {
+        handle.text( $( this ).slider( "value" ) );
+        //sound.play();
+      },
+      slide: function( event, ui ) {
+        handle.text( ui.value );
+        applyOnSound(null ,ui.value, null);
+      }
+    });
+  } );
+  $( function() {
+    var handle = $( "#custom-handle3" );
+    $( "#slider3" ).slider({
+      min:0,
+      max:100,
+      create: function() {
+        handle.text( $( this ).slider( "value" ) );
+        //sound.play();
+      },
+      slide: function( event, ui ) {
+        handle.text( ui.value );
+        applyOnSound(null ,null, ui.value);
+      }
+    });
+  } );
+  </script>
+</head>
+<body>
+ 
+<div id="slider">
+  <div id="custom-handle" class="ui-slider-handle"></div>
+</div>
+</br>
+<div id="slider2">
+  <div id="custom-handle2" class="ui-slider-handle"></div>
+</div><br>
+<div id="slider3">
+  <div id="custom-handle3" class="ui-slider-handle"></div>
+</div>
+ 
+ 
+</body>
+</html>
