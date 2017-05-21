@@ -1,10 +1,12 @@
 var config = {
-    apiKey: "AIzaSyDpdQGnnJJUjjQoUsoNG3-bSYcPqmLVfWg",
-    authDomain: "plethoradb-b25ff.firebaseapp.com",
-    databaseURL: "https://plethoradb-b25ff.firebaseio.com",
-    storageBucket: "plethoradb-b25ff.appspot.com",
-    messagingSenderId: "942520102070"
-};
+    apiKey: "AIzaSyBbVZ_D57Q8xjKxd5KXChjBJZg3z-yMi5I",
+    authDomain: "plethoraplayground.firebaseapp.com",
+    databaseURL: "https://plethoraplayground.firebaseio.com",
+    projectId: "plethoraplayground",
+    storageBucket: "plethoraplayground.appspot.com",
+    messagingSenderId: "863508120434"
+  };
+
 
 $(function () {
     //OrientationChange();
