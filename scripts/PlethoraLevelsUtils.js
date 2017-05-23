@@ -713,6 +713,9 @@ for(b in borderColorsLeft)
     }
 
     $("#open-btn").click(function () {
+        var ding = new Audio('sounds/open-drawer.mp3');
+        ding.play(); 
+        
         if(closeTaskTray)
         {
                 $('.right-sidebar-outer').toggleClass('show-from-right');
