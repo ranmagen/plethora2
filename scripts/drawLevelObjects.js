@@ -144,6 +144,8 @@
         if (sentence.slots[slotNum].content == "question") {
             ui.draggable.position({ of: $(this), my: 'left top', at: 'left top' });
             ui.draggable.draggable('option', 'revert', false);
+            var ding = new Audio('sounds/drop.wav');
+            ding.play(); 
         }  
         // else
         // {
