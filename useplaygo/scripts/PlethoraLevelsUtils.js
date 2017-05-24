@@ -21,6 +21,8 @@ var config = {
  var checkSuccessFlag = false;
 
 $(function () {
+ClearPlayGoEvents();
+
     var pause = "";
     var levelNum = GetLevelNum();
     var successCriterions;
@@ -739,6 +741,7 @@ for(b in borderColorsLeft)
     });
 
     $("#reload-btn").click(function () {
+         ClearPlayGoEvents();
          location.reload();
     });
 
@@ -753,8 +756,8 @@ for(b in borderColorsLeft)
     }
 
     function showLevelComplete(){        
-//WinAnimation();
-ClearPlayGoEvents();
+        //WinAnimation();
+        ClearPlayGoEvents();
         $("#move_to_next_lvl").delay(100).animate({
              top: '0px',
         }, 2000);
@@ -786,13 +789,13 @@ ClearPlayGoEvents();
        
     }
 
-    function setShapesSpeed(newSpeed)
-    {
-        for(i in shapes){
-            shapes[i].vx = shapes[i].vy = newSpeed;
-            speed = newSpeed;
-        }
+function setShapesSpeed(newSpeed)
+{
+    for(i in shapes){
+        shapes[i].vx = shapes[i].vy = newSpeed;
+        speed = newSpeed;
     }
+}
 
 function blurPage()
 {
