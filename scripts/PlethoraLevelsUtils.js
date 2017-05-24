@@ -8,7 +8,7 @@ var config = {
     storageBucket: "plethoradb-b25ff.appspot.com",
     messagingSenderId: "942520102070"
 };
-  var serverUrl = "http://simulife.weizmann.ac.il/PlaygoServer2Load/playgo/playgoservice/";
+
 /***********************************************************/
 /*                      Global Params                      */
 /***********************************************************/
@@ -21,8 +21,6 @@ var config = {
  var checkSuccessFlag = false;
 
 $(function () {
-ClearPlayGoEvents();
-
     var pause = "";
     var levelNum = GetLevelNum();
     var successCriterions;
@@ -299,10 +297,7 @@ for(b in borderColorsLeft)
                     hitWall = true;
                 }
                 if (hitWall == true && shapes[i].hitWallFlag == false) {
-                    //HitWallEvent(shapes[i]);
-                       sendPlaygoEventData(shapes[i].type, "Shape",
-                                            "topWall", "Wall",
-                                            "meet", [], i, 'GUI');
+                    HitWallEvent(shapes[i]);
                 }
                 else {
                     //check if shape hits other shape
@@ -317,10 +312,7 @@ for(b in borderColorsLeft)
                                 }
                                 else
                                 {
-                                    //HitTwoShapes(shapes[i], shapes[j]);
-                                       sendPlaygoEventData(shapes[i].type, "Shape",
-                                            shapes[j].type, "Shape",
-                                            "meet", [], 3, 'GUI');
+                                    HitTwoShapes(shapes[i], shapes[j]);
                                 }
                             }
                         }
@@ -404,100 +396,118 @@ for(b in borderColorsLeft)
         }, 400);
     }
 
-    // function HitTwoShapes(shape1, shape2) {
-    //     for (var i = 0; i < sentences.length; i++) {
-    //         var sentence = sentences[i];
-    //         if (sentence.completed == true) {
-    //             if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "shape") {
+    function HitTwoShapes(shape1, shape2) {
+        for (var i = 0; i < sentences.length; i++) {
+            var sentence = sentences[i];
+            if (sentence.completed == true) {
+                if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "shape") {
 
-    //                 var whenShape1 = GetSlotOrCard(sentence, 1).content;
-    //                 var whenShape2 = GetSlotOrCard(sentence, 3).content;
-    //                 if ((shape1.Equal(whenShape1) && shape2.Equal(whenShape2)) ||
-    //                     (shape1.Equal(whenShape2) && shape2.Equal(whenShape1))) {
-    //                     shape1.hitShapeFlag = true;
-    //                     shape2.hitShapeFlag = true;
-    //                     setTimeout(function () {
-    //                         shape1.hitShapeFlag = false;
-    //                         shape2.hitShapeFlag = false;
-    //                     }, 500);
-    //                     ExecuteAction(sentence, shape1);
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+                    var whenShape1 = GetSlotOrCard(sentence, 1).content;
+                    var whenShape2 = GetSlotOrCard(sentence, 3).content;
+                    if ((shape1.Equal(whenShape1) && shape2.Equal(whenShape2)) ||
+                        (shape1.Equal(whenShape2) && shape2.Equal(whenShape1))) {
+                        shape1.hitShapeFlag = true;
+                        shape2.hitShapeFlag = true;
+                        setTimeout(function () {
+                            shape1.hitShapeFlag = false;
+                            shape2.hitShapeFlag = false;
+                        }, 500);
+                        ExecuteAction(sentence, shape1);
+                    }
+                }
+            }
+        }
+    }
 
-    // function HitWallEvent(shape) {
+    function HitWallEvent(shape) {
     
-      
-    //         //check if there is sentence with hit wall event
-    //         for (var i = 0; i < sentences.length; i++) {
-    //             var sentence = sentences[i];
-    //             if (sentence.completed == true) {
-    //                 var whenShape = GetSlotOrCard(sentence, 1).content;
-    //                 if (shape.Equal(whenShape)) {
-    //                     var whenMethod = GetSlotOrCard(sentence, 2);
-    //                     var whenSecondShape = GetSlotOrCard(sentence, 3);
-    //                     if (whenMethod.content == "hit" && whenSecondShape.type == "wall") {
-    //                         shape.hitWallFlag = true;
-    //                         setTimeout(function () {
-    //                             shape.hitWallFlag = false;
-    //                         }, 200);
-    //                         ExecuteAction(sentence, shape);
-    //                     }
-    //                 }
-    //             }
-    //         }
-       
-    // }
+        //if (shape.hitWallFlag == false) {
+            //check if there is sentence with hit wall event
+            for (var i = 0; i < sentences.length; i++) {
+                var sentence = sentences[i];
+                if (sentence.completed == true) {
+                    var whenShape = GetSlotOrCard(sentence, 1).content;
+                    if (shape.Equal(whenShape)) {
+                        var whenMethod = GetSlotOrCard(sentence, 2);
+                        var whenSecondShape = GetSlotOrCard(sentence, 3);
+                        //if (sentence.slots[2].content == "hit" && sentence.slots[3].type == "wall") {
+                        if (whenMethod.content == "hit" && whenSecondShape.type == "wall") {
+                            shape.hitWallFlag = true;
+                            setTimeout(function () {
+                                shape.hitWallFlag = false;
+                            }, 200);
+                            ExecuteAction(sentence, shape);
+                        }
+                    }
+                }
+            }
+        //}
+    }
 
-    // //shape param is the shape that hitted the wall/ other shape...
-    // function ExecuteAction(sentence, shape) {
-    //     var whenShape = GetSlotOrCard(sentence, 1).content;
-    //     var thenSlotNum = GetThenSlotNumber(sentence);
-    //     var thenShape = GetSlotOrCard(sentence, thenSlotNum + 1);
-    //     var actionMethod = GetSlotOrCard(sentence, thenSlotNum + 2);
+    //shape param is the shape that hitted the wall/ other shape...
+    function ExecuteAction(sentence, shape) {
+        var whenShape = GetSlotOrCard(sentence, 1).content;
+        var thenSlotNum = GetThenSlotNumber(sentence);
+        var thenShape = GetSlotOrCard(sentence, thenSlotNum + 1);
+        var actionMethod = GetSlotOrCard(sentence, thenSlotNum + 2);
 
-    //     switch (actionMethod.content) {
-    //         case "created":
-    //             {                  
-    //                 var size = thenShape.content.size == undefined ? "medium" : thenShape.content.size;                    
-    //                 var radius = GetSize(size, thenShape.content.type).r;
-    //                 var newShape = new Shape(shapes.length, thenShape.content.type, thenShape.content.color, 
-    //                                          size, shape.x, shape.y, speed, speed);
+        switch (actionMethod.content) {
+            case "created":
+                {                  
+                    var size = thenShape.content.size == undefined ? "medium" : thenShape.content.size;                    
+                    var radius = GetSize(size, thenShape.content.type).r;
+                    var newShape = new Shape(shapes.length, thenShape.content.type, thenShape.content.color, 
+                                             size, shape.x, shape.y, speed, speed);
 
-    //                 newShape.hitWallFlag = true;
+                    newShape.hitWallFlag = true;
 
-    //                 setTimeout(function () {
-    //                      newShape.Created();
-    //                 }, 200);
+                    setTimeout(function () {
+                         newShape.Created();
+                    }, 200);
                                                                                
-    //                 setTimeout(function () {
-    //                     newShape.hitWallFlag = false;
-    //                 }, 250);
-    //                 break;
-    //             }
-    //             case "deleted":
-    //             {  
-    //                 if (shape.Equal(thenShape.content)) {  
-    //                     shape.Deleted();
-    //                 }
-    //                 break;
-    //             }
-    //         case "change_color":
-    //             {
-    //                 if (shape.Equal(whenShape.content)) {
-    //                     var newColor = GetSlotOrCard(sentence, thenSlotNum + 3).content;
-    //                     shape.ChangeColor(newColor);
-    //                 }
-    //                 break;
-    //             }
-    //     }
-    // }
+                    setTimeout(function () {
+                        newShape.hitWallFlag = false;
+                    }, 250);
+                    break;
+                }
+                case "deleted":
+                {  
+                    if (shape.Equal(thenShape.content)) {  
+                        shape.Deleted();
+                    }
+                    break;
+                }
+            case "change_color":
+                {
+                    if (shape.Equal(whenShape.content)) {
+                        var newColor = GetSlotOrCard(sentence, thenSlotNum + 3).content;
+                        shape.ChangeColor(newColor);
+                    }
+                    break;
+                }
+        }
+    }
 
   
 
+    function GetSlotOrCard(sentence, slotNum)
+    {
+        if (sentence.slots[slotNum].content == "question") {
+            var cardNum = sentence.slots[slotNum].card;
+            return cards[cardNum];
+        }
+        else {
+            return sentence.slots[slotNum];
+        }
+    }
 
+    function GetThenSlotNumber(sentence) {
+        var slotsCnt = sentence.slots.length - 1;
+        for (var i = slotsCnt; i >= 0; i--) {
+            if (sentence.slots[i].content == "then")
+                return i;
+        }
+    }
 
     function GetColor(colorName) {
         switch (colorName) {
@@ -689,7 +699,6 @@ for(b in borderColorsLeft)
     // });
 
     function ClearLevel() {
-        alert("ClearLevel");
         $("#slots-container div").remove();
         $("#cards-container div").remove();
         ctx.fillStyle = '#00031a';
@@ -703,7 +712,18 @@ for(b in borderColorsLeft)
         $("#open-light").css({ fill: "#898989" });
     }
 
-    $("#open-btn").click(function () {
+$("#open-btn").click(function () {
+
+        var ding = new Audio('sounds/open-drawer.mp3');
+        ding.play(); 
+
+        if(levelNum == 0) //remove cursor image
+        {
+            clearInterval(clickOpenSidebarInstruction);
+            $(".click-cursor-img").hide();
+            $(".pointer-cursor-img").hide();
+        }
+
         if(closeTaskTray)
         {
                 $('.right-sidebar-outer').toggleClass('show-from-right');
@@ -716,6 +736,13 @@ for(b in borderColorsLeft)
                     setTimeout(function() {
                         $(".card").effect( "shake", {times: 1}, 200 );
                     }, 300);
+
+                    if(levelNum == 0 )
+                    {
+                        setTimeout(function() {
+                            showInstructionReadRule();
+                        }, 1000);
+                    }                                   
                 }
                 else //close sidebar
                 {
@@ -728,20 +755,16 @@ for(b in borderColorsLeft)
                             {
                                 blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
                             }
-
                         }, 10000);
-
                     }
                     setTimeout(function () {
                         pause = requestAnimationFrame(draw);
                     }, 500);
-
                 }
         }
     });
 
     $("#reload-btn").click(function () {
-         ClearPlayGoEvents();
          location.reload();
     });
 
@@ -755,9 +778,10 @@ for(b in borderColorsLeft)
         return levelNum == undefined ? 0 : levelNum;
     }
 
-    function showLevelComplete(){        
-        //WinAnimation();
-        ClearPlayGoEvents();
+    function showLevelComplete(){
+
+//WinAnimation();
+
         $("#move_to_next_lvl").delay(100).animate({
              top: '0px',
         }, 2000);
@@ -765,14 +789,6 @@ for(b in borderColorsLeft)
              top: '0px',
         }, 2000);
         blurPage();
-    }
-
-    function ClearPlayGoEvents()
-    {
-        var rules = new Array();
-        var rule = new playgoRule();
-        rules.push(rule);
-        SendRulesToPlayGo(rules);
     }
 
     function showWinCondition(){
@@ -789,13 +805,13 @@ for(b in borderColorsLeft)
        
     }
 
-function setShapesSpeed(newSpeed)
-{
-    for(i in shapes){
-        shapes[i].vx = shapes[i].vy = newSpeed;
-        speed = newSpeed;
+    function setShapesSpeed(newSpeed)
+    {
+        for(i in shapes){
+            shapes[i].vx = shapes[i].vy = newSpeed;
+            speed = newSpeed;
+        }
     }
-}
 
 function blurPage()
 {
@@ -811,6 +827,10 @@ function unBlurPage()
     var blinkCloseSidebarLight;
 
     $("#ok_win_btn").click(function(){
+
+   var ding = new Audio('sounds/mouse-click.wav');
+   ding.play();
+
         closeTaskTray = true;
          $("#level_name").text(level.task);      
            $("#win_condition").delay(100).animate({
@@ -818,7 +838,16 @@ function unBlurPage()
         }, 750);
            setTimeout(function () {
                blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
-            }, 1500);
+
+if(levelNum == 0)
+{
+    showInsructionOpenSidebar();
+}
+
+
+
+
+    }, 1500);
        setTimeout(function () {
             setShapesSpeed(3);
             unBlurPage();
@@ -826,6 +855,9 @@ function unBlurPage()
     });
 
     $("#next_lvl_btn").click(function(){
+           var ding = new Audio('sounds/mouse-click.wav');
+            ding.play();
+
             levelNum++;
             window.location.href = "levels.html?level=" + levelNum;
     });
@@ -860,104 +892,43 @@ function unBlurPage()
         }
     }
 
+    var clickOpenSidebarInstruction;
 
-    /********************************************/
-    /*                  PlayGo                  */
-    /********************************************/
-
-    //Define event prototype
-    function playgoEvent (sourceObject, sourceClass,
-            targetObject, targetClass, methodName, args, id, generator) {
-
-        this.sourceObject = sourceObject;
-        this.sourceClass = sourceClass;
-        this.targetObject = targetObject;
-        this.targetClass = targetClass;
-        this.methodName = methodName;
-        this.args = args;
-        this.id = id;
-        this.generator = generator;
-        
-        this.toString = function() {
-            return this.generator + this.id + " " + 
-            this.targetObject + "."+ this.methodName + "(" + 
-            this.args + ")";
-        }	
-    }
-
-    function sendPlaygoEventData(sourceObject, sourceClass, 
-		targetObject, targetClass, methodName, args, id, generator) {
-        var server = serverUrl + "playgoEvent";
-	    var pEvent = new playgoEvent(sourceObject, sourceClass, 
-			targetObject, targetClass, methodName, args, id, 
-			generator);	
-	
-	 $.ajax({
-	        url: server,
-	        type: 'POST',
-	        dataType: 'json',
-	        data: JSON.stringify(pEvent),
-	        contentType: 'application/json',
-	        mimeType: 'application/json',
-	        accept: 'application/json',
-	 
-	        success: function (data) { //data is an object  
-                if(data != null && data.length > 1)
-                {     
-                    ExecutePlayGoAction(data[0].id,  data[1].methodName, data[1].targetObject, data[1].args[0]);
-                }                 
-	        },
-	        error:function(data,status,er) {
-	            alert("error: "+data+" status: "+status+" er:"+er);
-	        }
-	 		}); 
-    }
-
-    function ExecutePlayGoAction(i, actionMethod, thenShapeType, thenShapeColor)
+    function showInsructionOpenSidebar()
     {
-        var shape = shapes[i];
-         switch (actionMethod) {
-                case "appear":
-                {                  
-                    var size ="medium"; //thenShape.size == undefined ? "medium" : thenShape.size;                    
-                    var radius = GetSize("medium", thenShapeType).r;// GetSize(size, thenShape.content.type).r;
-                    var newShape = new Shape(shapes.length, thenShapeType, thenShapeColor, 
-                                             size, shape.x, shape.y, speed, speed);
+        var topPosition = $("#open-btn").position().top + 50;
+        var cusrsor1 = $("<img src='images/cursor_pointer.png' class='pointer-cursor-img'></img>").css({ top: topPosition +'px' }).appendTo(".containerDiv");
+        var leftPosition = innerWidth - 55;
 
-                    newShape.hitWallFlag = true;
-                    setTimeout(function () {
-                         newShape.Created();
-                    }, 200);
-                                                                               
-                    setTimeout(function () {
-                        newShape.hitWallFlag = false;
-                    }, 250);
-                    break;
-                }
-         }
+        cusrsor1.animate({
+                    left: leftPosition + 'px',
+                    opacity: '1',            
+                }, 1000);
+        
+        setTimeout(function(){
+            //cusrsor1.hide();
+            //leftPosition = cusrsor1.position().left;
+            var cusrsor2 = $("<img src='images/click_cursor.png' class='click-cursor-img'></img>")
+            .css({ top: topPosition +'px' }).css({ left: leftPosition +'px' }).appendTo(".containerDiv");
+            clickOpenSidebarInstruction = window.setInterval("$('.click-cursor-img').toggle();",500);
+        }, 1100)        
     }
 
-});
-
-   function playgoEventRule(type, sourceObject, sourceClass, targetObject, targetClass, methodName, args) { 
-    this.type = type;
-	this.sourceObject = sourceObject;
-	this.sourceClass = sourceClass; 
-	this.targetObject = targetObject;
-	this.targetClass = targetClass;
-	this.methodName = methodName;
-	this.args = args;
-   
-	this.toString = function() {
-            return this.type + " " + 
-            this.targetObject + "."+
-            this.targetClass + "." + 
-            this.methodName + "(" + 
-            this.args + ")";
+    function showInstructionReadRule()
+    {
+        var topPosition = $("#slot0_0").position().top;// + 50;
+        var leftPosition = $("#slot0_0").position().left;// + 25;
+        var pointer = $("<img src='images/cursor.png' class='cursor-img'></img>")
+         .css({ top: topPosition +'px', left: leftPosition +'px' , position: 'absolute'}).appendTo("#sidebar");
+        
+        for(var i=0; i < 7 ; i++)
+        {
+            //$("#slot0_" + i)
         }
     }
 
 
+});
 
 
 
