@@ -19,9 +19,10 @@ var config = {
  var speed = 3;
  var closeTaskTray = false;
  var checkSuccessFlag = false;
+ var uniqueUserid = "0";
 
 $(function () {
-ClearPlayGoEvents();
+    ClearPlayGoEvents();
 
     var pause = "";
     var levelNum = GetLevelNum();
@@ -302,7 +303,7 @@ for(b in borderColorsLeft)
                     //HitWallEvent(shapes[i]);
                        sendPlaygoEventData(shapes[i].type, "Shape",
                                             "topWall", "Wall",
-                                            "meet", [], i, 'GUI');
+                                            "meet", [], i, 'GUI', uniqueUserid);
                 }
                 else {
                     //check if shape hits other shape
@@ -320,7 +321,7 @@ for(b in borderColorsLeft)
                                     //HitTwoShapes(shapes[i], shapes[j]);
                                        sendPlaygoEventData(shapes[i].type, "Shape",
                                             shapes[j].type, "Shape",
-                                            "meet", [], 3, 'GUI');
+                                            "meet", [], 3, 'GUI', uniqueUserid);
                                 }
                             }
                         }
@@ -769,10 +770,20 @@ for(b in borderColorsLeft)
 
     function ClearPlayGoEvents()
     {
-        var rules = new Array();
-        var rule = new playgoRule();
-        rules.push(rule);
-        SendRulesToPlayGo(rules);
+        try
+        {
+            var rules = new Array();
+            var rule = new playgoRule();
+            rules.push(rule);
+            var rulesList = {rules: rules, userid: uniqueUserid};
+            //SendRulesToPlayGo(rules);
+            SendRulesToPlayGo(rulesList);
+        }
+        catch(err)
+        {
+            errCounter++;
+        }
+
     }
 
     function showWinCondition(){
@@ -867,7 +878,7 @@ function unBlurPage()
 
     //Define event prototype
     function playgoEvent (sourceObject, sourceClass,
-            targetObject, targetClass, methodName, args, id, generator) {
+            targetObject, targetClass, methodName, args, id, generator, userid) {
 
         this.sourceObject = sourceObject;
         this.sourceClass = sourceClass;
@@ -877,40 +888,54 @@ function unBlurPage()
         this.args = args;
         this.id = id;
         this.generator = generator;
+        this.userid = userid;
         
         this.toString = function() {
-            return this.generator + this.id + " " + 
-            this.targetObject + "."+ this.methodName + "(" + 
+            return this.userid + this.generator + this.id + " " +
+            this.targetObject + "."+ this.methodName + "(" +
             this.args + ")";
         }	
     }
 
+    errCounter = 0;
+
     function sendPlaygoEventData(sourceObject, sourceClass, 
-		targetObject, targetClass, methodName, args, id, generator) {
-        var server = serverUrl + "playgoEvent";
-	    var pEvent = new playgoEvent(sourceObject, sourceClass, 
-			targetObject, targetClass, methodName, args, id, 
-			generator);	
-	
-	 $.ajax({
-	        url: server,
-	        type: 'POST',
-	        dataType: 'json',
-	        data: JSON.stringify(pEvent),
-	        contentType: 'application/json',
-	        mimeType: 'application/json',
-	        accept: 'application/json',
-	 
-	        success: function (data) { //data is an object  
-                if(data != null && data.length > 1)
-                {     
-                    ExecutePlayGoAction(data[0].id,  data[1].methodName, data[1].targetObject, data[1].args[0]);
-                }                 
-	        },
-	        error:function(data,status,er) {
-	            alert("error: "+data+" status: "+status+" er:"+er);
-	        }
-	 		}); 
+		targetObject, targetClass, methodName, args, id, generator, userid) {
+        try
+        {
+            var server = serverUrl + "playgoEvent";
+            var pEvent = new playgoEvent(sourceObject, sourceClass, 
+                targetObject, targetClass, methodName, args, id, 
+                generator, userid);	
+        
+            $.ajax({
+                url: server,
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(pEvent),
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                accept: 'application/json',
+        
+                success: function (data) { //data is an object  
+                    if(data != null && data.length > 1)
+                    {     
+                        //ExecutePlayGoAction(data[0].id,  data[1].methodName, data[1].targetObject, data[1].args[0]);
+                        if(data[0].userid != uniqueUserid) {
+                            uniqueUserid = data[0].userid;
+                        }
+                        ExecutePlayGoAction(data[0].id,  data[1].methodName, data[1].targetObject, data[1].args[0]);
+                    }                 
+                },
+                error:function(data,status,er) {
+                    alert("error: "+data+" status: "+status+" er:"+er);
+                }
+                }); 
+            }
+            catch(err)
+            {
+                errCounter++;
+            }
     }
 
     function ExecutePlayGoAction(i, actionMethod, thenShapeType, thenShapeColor)
@@ -939,7 +964,7 @@ function unBlurPage()
 
 });
 
-   function playgoEventRule(type, sourceObject, sourceClass, targetObject, targetClass, methodName, args) { 
+   function playgoEventRule(type, sourceObject, sourceClass, targetObject, targetClass, methodName, args, userid) { 
     this.type = type;
 	this.sourceObject = sourceObject;
 	this.sourceClass = sourceClass; 
@@ -947,17 +972,23 @@ function unBlurPage()
 	this.targetClass = targetClass;
 	this.methodName = methodName;
 	this.args = args;
+    this.userid = userid;
    
-	this.toString = function() {
-            return this.type + " " + 
-            this.targetObject + "."+
-            this.targetClass + "." + 
-            this.methodName + "(" + 
+   this.toString = function() {
+            return this.userid + this.generator + this.id + " " + 
+            this.targetObject + "."+ this.methodName + "(" + 
             this.args + ")";
-        }
+        }	
+	// this.toString = function() {
+    //         return this.type + " " + 
+    //         this.targetObject + "."+
+    //         this.targetClass + "." + 
+    //         this.methodName + "(" + 
+    //         this.args + ")";
+    //     }
     }
 
-
+errCounter = 0;
 
 
 

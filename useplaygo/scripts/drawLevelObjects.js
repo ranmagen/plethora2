@@ -1,4 +1,4 @@
-﻿     
+﻿﻿     
      
      function DrawSentences() {
         var sentencesCnt = sentences.length;
@@ -166,11 +166,8 @@
             }
         }
         sentence.completed = true;
-
-var rules = GetPlayGoRules();
-SendRulesToPlayGo(rules);
-
-
+        var rules = GetPlayGoRules();
+        SendRulesToPlayGo(rules);
         BlinkCloseLightColor();
         return true;
     }
@@ -224,7 +221,8 @@ function GetPlayGoRules()
         }
         rules[rules.length] = rule;
     }
-    return rules;
+    var rulesList = {rules: rules, userid: uniqueUserid};
+    return rulesList; //rules;
 }
 
 function SendRulesToPlayGo(rules)
@@ -246,6 +244,11 @@ function SendRulesToPlayGo(rules)
 	            // 	//$('.out-debug-id').append("Recieved data: " + event.toString() + "<br>");
            	
 	            // }
+                //save the userid you got
+                var useridnew = data.userid;
+                if(useridnew != uniqueUserid) {
+                    uniqueUserid = useridnew;
+                }
 	        },
 	        error:function(data,status,er) {
 	            alert("error: "+data+" status: "+status+" er:"+er);
