@@ -2,12 +2,11 @@
 /*                     Firebase Config                     */
 /***********************************************************/
 var config = {
-    apiKey: "AIzaSyDcuAKfJywiKF_ja2NQ60fSSgsEDGsziy8",
-    authDomain: "plethora-55f53.firebaseapp.com",
-    databaseURL: "https://plethora-55f53.firebaseio.com",
-    projectId: "plethora-55f53",
-    storageBucket: "plethora-55f53.appspot.com",
-    messagingSenderId: "18264595396"
+    apiKey: "AIzaSyDpdQGnnJJUjjQoUsoNG3-bSYcPqmLVfWg",
+    authDomain: "plethoradb-b25ff.firebaseapp.com",
+    databaseURL: "https://plethoradb-b25ff.firebaseio.com",
+    storageBucket: "plethoradb-b25ff.appspot.com",
+    messagingSenderId: "942520102070"
 };
 
 /***********************************************************/
@@ -29,18 +28,12 @@ $(function () {
     var ctx = canvas.getContext('2d');
     var checkSuccess = true;
     ctx.canvas.width = $("#sidebar").offset().left;
-
-var winHight = window.innerHeight == 950 ? 850 : window.innerHeight;
- ctx.canvas.height = winHight - $("#header").height();
-    //ctx.canvas.height = window.innerHeight - $("#header").height();
+    var winHight = window.innerHeight == 950 ? 850 : window.innerHeight;
+    ctx.canvas.height = winHight - $("#header").height();
     ctx.fillStyle = '#00031a';
-
     var limitShapes;
     var container = { x: 60, y: 10, width: ctx.canvas.width - 130, height: ctx.canvas.height - 60 };
-
     ctx.fillRect(container.x, container.y, container.width, container.height);
-
-  //  ctx.strokeRect(container.x, container.y, container.width, container.height);
 
 
  /***********************************************************/
@@ -113,6 +106,7 @@ for(b in borderColorsBottom)
     xpos = xpos - bLength;
 }
 xpos += 10;
+
 //Left Border
 for(b in borderColorsLeft)
 {
@@ -165,20 +159,11 @@ for(b in borderColorsLeft)
         {
             shapes.push(this);
             SetShapesCurrentState();
-            // $("#limit-shapes").text(shapes.length + " מתוך " +  limitShapes);
         }
     }
 
     Shape.prototype.Deleted = function () {  
         this.delete = true;
-        // for(var i in shapes)
-        // {
-        //     if(shapes[i].id == this.id)
-        //     {
-        //         shapes.splice(i,1);
-        //     }
-        // }   
-        // SetShapesCurrentState();
     }
 
     Shape.prototype.ChangeColor = function (newColor) {
@@ -263,7 +248,6 @@ for(b in borderColorsLeft)
                         }
                     case "square":
                         {                         
-                            //ctx.rect(shapes[i].x, shapes[i].y, shapes[i].w, shapes[i].h);
                             var path = new Path2D();
                             ctx.moveTo(shapes[i].x - shapes[i].r, shapes[i].y + shapes[i].r);
                             ctx.lineTo(shapes[i].x + shapes[i].r, shapes[i].y + shapes[i].r);
@@ -527,7 +511,6 @@ for(b in borderColorsLeft)
             case "color4":
                 {
                     return "#845478";
-                    // return "#AA6666";
                 }
             case "color5":
                 {
@@ -614,7 +597,8 @@ for(b in borderColorsLeft)
 
             setTimeout(function () {
                 if (checkSuccess == true) {                   
-                    checkSuccess = false;                
+                    checkSuccess = false;
+
                     showLevelComplete();
                     cancelAnimationFrame(pause);
                     clearInterval(blinkOpenSidebarLight);
@@ -635,18 +619,6 @@ for(b in borderColorsLeft)
                         {        
                             return true;
                         }
-                        // for (var i = 0; i < shapes.length; i++) {
-                        //     if (shapes[i].Equal(successCriterion.shape1)) {
-                        //         cnt++;
-                        //         if (cnt == successCriterion.amount) {
-                        //             for (var j = 0; j < sentences.length; j++) {
-                        //                 //sentences[j].completed = false;
-                        //             }
-                        //             return true;
-                        //         }
-
-                        //     }
-                        // }
                     }
                     break;
                 }
@@ -691,14 +663,6 @@ for(b in borderColorsLeft)
         return cnt;
     }
 
-    // $("#move_to_next_lvl").click(function () {
-    //     $("#move_to_next_lvl").hide();
-    //     ClearLevel();
-    //     levelNum++;
-    //     shapes = [];
-    //     LevelSetup();
-    // });
-
     function ClearLevel() {
         $("#slots-container div").remove();
         $("#cards-container div").remove();
@@ -713,8 +677,7 @@ for(b in borderColorsLeft)
         $("#open-light").css({ fill: "#898989" });
     }
 
-$("#open-btn").click(function () {
-
+    $("#open-btn").click(function () {
         var ding = new Audio('sounds/open-drawer.mp3');
         ding.play(); 
 
@@ -740,9 +703,7 @@ $("#open-btn").click(function () {
 
                     if(levelNum == 0 )
                     {
-                        setTimeout(function() {
-                            showInstructionReadRule();
-                        }, 1000);
+                        showTooltiopInterval = setInterval(showTooltip, 1000);
                     }                                   
                 }
                 else //close sidebar
@@ -781,8 +742,10 @@ $("#open-btn").click(function () {
 
     function showLevelComplete(){
 
-//WinAnimation();
+                       var ding = new Audio('sounds/tada.wav');
+        ding.play();
 
+setTimeout(function() {
         $("#move_to_next_lvl").delay(100).animate({
              top: '0px',
         }, 2000);
@@ -790,6 +753,9 @@ $("#open-btn").click(function () {
              top: '0px',
         }, 2000);
         blurPage();
+}, 1000);
+
+    
     }
 
     function showWinCondition(){
@@ -840,15 +806,11 @@ function unBlurPage()
            setTimeout(function () {
                blinkOpenSidebarLight = setInterval(AttentionSidebar, 400);
 
-if(levelNum == 0)
-{
-    showInsructionOpenSidebar();
-}
-
-
-
-
-    }, 1500);
+            if(levelNum == 0)
+            {
+                showInsructionOpenSidebar();
+            }
+                }, 1500);
        setTimeout(function () {
             setShapesSpeed(3);
             unBlurPage();
@@ -868,7 +830,6 @@ if(levelNum == 0)
     });
 
      function getRandom(min, max) {
-       // return min + Math.floor(Math.random() * (max - min + 1));
         return min + Math.random() * (max - min + 1);
     }
 
@@ -907,28 +868,65 @@ if(levelNum == 0)
                 }, 1000);
         
         setTimeout(function(){
-            //cusrsor1.hide();
-            //leftPosition = cusrsor1.position().left;
             var cusrsor2 = $("<img src='images/click_cursor.png' class='click-cursor-img'></img>")
             .css({ top: topPosition +'px' }).css({ left: leftPosition +'px' }).appendTo(".containerDiv");
             clickOpenSidebarInstruction = window.setInterval("$('.click-cursor-img').toggle();",500);
-        }, 1100)        
+        }, 1100);        
     }
 
-    function showInstructionReadRule()
-    {
-        var topPosition = $("#slot0_0").position().top;// + 50;
-        var leftPosition = $("#slot0_0").position().left;// + 25;
-        var pointer = $("<img src='images/cursor.png' class='cursor-img'></img>")
-         .css({ top: topPosition +'px', left: leftPosition +'px' , position: 'absolute'}).appendTo("#sidebar");
-        
-        for(var i=0; i < 7 ; i++)
-        {
-            //$("#slot0_" + i)
+    var topPosition = $("#slots-container").position().top;// + 70;
+    var leftPosition = $("#slots-container").position().left + 295;// + 640;
+    var pointer = levelNum == 0 ? $("<img src='images/cursor.png' class='cursor-img'></img>")
+            .css({ top: topPosition +'px', left: leftPosition +'px' , position: 'absolute'}).appendTo("#sidebar") : null;
+    var slot = 0;
+
+    function showTooltip()
+    {           
+        if(slot < 7)   
+        {          
+            pointer.animate({
+            left: leftPosition - slot * 100 + 'px'          
+                                    }, 680);                   
+            $('#slot0_' + slot + ' .tooltiptext').css("visibility", "visible").css("opacity", "1");
+            slot++;
         }
+        else
+        {
+            clearInterval(showTooltiopInterval);
+            setTimeout(function() {
+                pointer.hide();
+                dragInterval = window.setInterval(
+                    "$('#card0').toggle();"
+                    , 350);
+            }, 1000);
+
+            setTimeout(function() {
+                toggleBorderQuestionSlot();
+            }, 1500);
+
+            setTimeout(function() {
+                clearInterval(dragInterval);
+                 $('#card0').css("display", "block");
+            }, 4500);
+           
+
+        }      
     }
 
-
+function toggleBorderQuestionSlot()
+{
+    var cnt = 0;    
+    var timer = setInterval(function () {
+        cnt++
+        if (cnt == 6) {
+            $("#slot0_5").css('border', '2px white solid');
+            clearInterval(timer);
+        } else {
+            cnt % 2 == 1 ? $("#slot0_5").css('border', 'none') : $("#slot0_5").css('border', '2px white solid');
+        }
+    }, 1000);
+}
+ 
 });
 
 

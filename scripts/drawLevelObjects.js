@@ -134,23 +134,17 @@
     }
 
     function HandleCardDrop(event, ui) {
-        //alert("HandleCardDrop");
         var slotData = $(this).data('number');
         var cardNum = ui.draggable.data('number');
         var sentenceNum = slotData.split("_")[0];
         var sentence = sentences[sentenceNum];
         var slotNum = slotData.split("_")[1];
-        //if (sentence.slots[slotNum].question == true) {
         if (sentence.slots[slotNum].content == "question") {
             ui.draggable.position({ of: $(this), my: 'left top', at: 'left top' });
             ui.draggable.draggable('option', 'revert', false);
             var ding = new Audio('sounds/drop.wav');
             ding.play(); 
-        }  
-        // else
-        // {
-        //     alert("out");
-        // }
+        }       
         sentence.slots[slotNum].card = cardNum;
         CheckIfSentenceCompleted(sentence);
     }
