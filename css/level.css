@@ -123,17 +123,17 @@
     .show-from-right {
         transform: translate3d(-920px, 0, 0);
     }
-
     #open-btn {
         left: 94.6% !important;
     }
 }
 
+/**** wide screen ****/
 @media only screen and (min-width : 1824px) {
     .show-from-right {
         transform: translate3d(-1855px, 0, 0);
     }
-     #open-btn {
+    #open-btn {
             left: 97.3% !important;
     }
     #win_condition_btn, #move_to_next_lvl_btn
@@ -530,6 +530,29 @@ body {
 #dialog
 {
     cursor: pointer;
+}
+
+.pointer-cursor-img
+{
+    width: 50px;
+    position: fixed;
+    z-index: 10000;
+    left:50%;
+    opacity: 0;
+}
+
+.click-cursor-img
+{
+    width: 50px;
+    position: fixed;
+    z-index: 10000;
+}
+
+.cursor-img
+{
+    width: 50px;
+    /*position: fixed;*/
+    z-index: 10000;
 }
 
 
