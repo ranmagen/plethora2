@@ -2,7 +2,6 @@
 /*                     Firebase Config                     */
 /***********************************************************/
 var config = {
-{
     apiKey: "AIzaSyDcuAKfJywiKF_ja2NQ60fSSgsEDGsziy8",
     authDomain: "plethora-55f53.firebaseapp.com",
     databaseURL: "https://plethora-55f53.firebaseio.com",
