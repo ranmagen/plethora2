@@ -2,12 +2,13 @@
 /*                     Firebase Config                     */
 /***********************************************************/
 var config = {
-    apiKey: "AIzaSyDpdQGnnJJUjjQoUsoNG3-bSYcPqmLVfWg",
-    authDomain: "plethoradb-b25ff.firebaseapp.com",
-    databaseURL: "https://plethoradb-b25ff.firebaseio.com",
-    storageBucket: "plethoradb-b25ff.appspot.com",
-    messagingSenderId: "942520102070"
-};
+    apiKey: "AIzaSyDcuAKfJywiKF_ja2NQ60fSSgsEDGsziy8",
+    authDomain: "plethora-55f53.firebaseapp.com",
+    databaseURL: "https://plethora-55f53.firebaseio.com",
+    projectId: "plethora-55f53",
+    storageBucket: "plethora-55f53.appspot.com",
+    messagingSenderId: "18264595396"
+}
 
 /***********************************************************/
 /*                      Global Params                      */
